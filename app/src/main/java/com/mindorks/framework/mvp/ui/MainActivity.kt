@@ -1,7 +1,8 @@
-package com.mindorks.framework.mvp
+package com.mindorks.framework.mvp.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.mindorks.framework.mvp.R
 
 class MainActivity : AppCompatActivity() {
 
