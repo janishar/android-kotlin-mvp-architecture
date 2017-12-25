@@ -21,11 +21,11 @@ This repository contains a detailed sample app that implements MVP architecture 
 <br>
 
 # Architecture Blueprint
-![Blueprint](https://janishar.github.io/images/mvp-app-pics/mvp-arch.png)
+![Blueprint](https://janishar.github.io/images/mvp-app-pics/mvp-interactor-arch.png)
 <br>
 
 # Project Structure
-![Structure](https://janishar.github.io/images/mvp-app-pics/mvp-project-structure-diagram.png)
+![Structure](https://janishar.github.io/images/mvp-app-pics/mvp-interactor-project-structure.png)
 <br>
 
 # Read the below listed articles. They describe the MVP concepts and the Project structure.
