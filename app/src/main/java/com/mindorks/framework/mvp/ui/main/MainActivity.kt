@@ -1,10 +1,10 @@
-package com.mindorks.framework.mvp.ui
+package com.mindorks.framework.mvp.ui.main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mindorks.framework.mvp.R
+import com.mindorks.framework.mvp.ui.base.BaseView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseView(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
