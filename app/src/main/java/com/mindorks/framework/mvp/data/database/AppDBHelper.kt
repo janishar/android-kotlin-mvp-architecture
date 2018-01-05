@@ -3,14 +3,15 @@ package com.mindorks.framework.mvp.data.database
 import com.mindorks.framework.mvp.data.database.repository.options.Options
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
 import com.mindorks.framework.mvp.data.database.repository.user.User
+import javax.inject.Inject
 
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class AppDBHelper : DBHelper {
+class AppDBHelper @Inject constructor(appDatabase : AppDatabase) : DBHelper {
 
 
-    var appDatabase: AppDatabase? = null
+    var appDatabase = appDatabase
 
     override fun insertQuestions(questions: List<Question>) {
         appDatabase?.questionsDao()?.insertAll(questions)
@@ -33,6 +34,10 @@ class AppDBHelper : DBHelper {
 
     override fun insertUser(user: User) {
         appDatabase?.userDao()?.insert(user)
+    }
+
+    override fun loadUsers(): List<User>? {
+        return appDatabase?.userDao().getUser()
     }
 
 }

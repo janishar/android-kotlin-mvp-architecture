@@ -15,6 +15,8 @@ interface DBHelper {
 
     fun insertOptions(options: List<Options>)
 
+    fun loadUsers(): List<User>?
+
     fun loadQuestions(): List<Question>?
 
     fun loadOptions(questionId : String): List<Options>?

@@ -1,20 +1,22 @@
 package com.mindorks.framework.mvp.data
 
-import com.mindorks.framework.mvp.data.database.AppDBHelper
 import com.mindorks.framework.mvp.data.database.DBHelper
 import com.mindorks.framework.mvp.data.database.repository.options.Options
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
 import com.mindorks.framework.mvp.data.database.repository.user.User
 import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
+import javax.inject.Inject
 
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class AppDataManager(dbHelper: DBHelper, apiHelper: ApiHelper, prefHelper: PreferenceHelper) : DataManager {
+class AppDataManager @Inject constructor(dbHelper: DBHelper, apiHelper: ApiHelper, prefHelper: PreferenceHelper) : DataManager {
 
+    private var dbHelper: DBHelper = dbHelper
+    private var apiHelper: ApiHelper = apiHelper
+    private var prefHelper: PreferenceHelper = prefHelper
 
-    var dbHelper: DBHelper = AppDBHelper()
 
     override fun insertUser(user: User) {
         dbHelper.insertUser(user)
@@ -34,5 +36,9 @@ class AppDataManager(dbHelper: DBHelper, apiHelper: ApiHelper, prefHelper: Prefe
 
     override fun loadOptions(questionId: String): List<Options>? {
         return dbHelper.loadOptions(questionId)
+    }
+
+    override fun loadUsers(): List<User>? {
+        return dbHelper.loadUsers()
     }
 }
