@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvp.di.builder
 
-import com.mindorks.framework.mvp.ui.main.MainActivity
+import com.mindorks.framework.mvp.ui.main.MainActivityModule
+import com.mindorks.framework.mvp.ui.main.view.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,6 +11,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = arrayOf(MainActivityModule::class))
     abstract fun bindMainActivity(): MainActivity
 }

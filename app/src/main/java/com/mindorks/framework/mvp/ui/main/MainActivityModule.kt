@@ -1,7 +1,7 @@
 package com.mindorks.framework.mvp.ui.main
 
-import com.mindorks.framework.mvp.interactor.base.main.MainInteractor
-import com.mindorks.framework.mvp.interactor.base.main.MainInteractorImpl
+import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
+import com.mindorks.framework.mvp.ui.main.interactor.MainInteractorImpl
 import com.mindorks.framework.mvp.ui.main.presenter.MainPresenter
 import com.mindorks.framework.mvp.ui.main.presenter.MainPresenterImpl
 import com.mindorks.framework.mvp.ui.main.view.MainView

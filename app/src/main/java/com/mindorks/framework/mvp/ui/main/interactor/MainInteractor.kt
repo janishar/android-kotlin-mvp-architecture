@@ -1,4 +1,4 @@
-package com.mindorks.framework.mvp.interactor.base.main
+package com.mindorks.framework.mvp.ui.main.interactor
 
 import com.mindorks.framework.mvp.ui.base.interactor.MVPInteractor
 import io.reactivex.Observable

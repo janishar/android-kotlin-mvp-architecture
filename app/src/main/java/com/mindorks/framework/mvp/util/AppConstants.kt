@@ -6,7 +6,7 @@ package com.mindorks.framework.mvp.util
 class AppConstants {
 
     companion object {
-        internal var APP_DB_NAME = "mindorks_mvvm.db"
+        internal var APP_DB_NAME = "mindorks_mvp.db"
 
     }
 }
