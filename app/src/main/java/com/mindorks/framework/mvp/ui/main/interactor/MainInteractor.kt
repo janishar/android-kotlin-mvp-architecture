@@ -1,0 +1,13 @@
+package com.mindorks.framework.mvp.interactor.base.main
+
+import com.mindorks.framework.mvp.ui.base.interactor.MVPInteractor
+import io.reactivex.Observable
+
+/**
+ * Created by jyotidubey on 04/01/18.
+ */
+interface MainInteractor : MVPInteractor {
+
+    fun seedQuestions() : Observable<Boolean>
+    fun seedOptions() : Observable<Boolean>
+}
