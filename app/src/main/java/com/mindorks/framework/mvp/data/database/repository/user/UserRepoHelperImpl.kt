@@ -12,7 +12,7 @@ class UserRepoHelperImpl @Inject constructor(val userDao: UserDao) : UserRepoHel
         return Observable.just(true)
     }
 
-    override fun loadUsers(): List<User>? {
+    override fun loadUsers(): List<User> {
         return userDao.getUser()
     }
 }

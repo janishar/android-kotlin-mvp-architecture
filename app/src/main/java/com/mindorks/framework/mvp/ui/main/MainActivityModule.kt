@@ -26,7 +26,7 @@ class MainActivityModule {
     }
 
     @Provides
-    internal fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl<MainView, MainInteractor>): MainPresenter<MainView, MainInteractor> {
+    internal fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl<MainView, MainInteractor>): MainPresenter<MainView,MainInteractor> {
         return mainPresenterImpl
     }
 

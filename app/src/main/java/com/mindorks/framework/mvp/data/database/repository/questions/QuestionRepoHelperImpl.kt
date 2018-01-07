@@ -8,13 +8,19 @@ import javax.inject.Inject
  */
 class QuestionRepoHelperImpl @Inject constructor(val questionsDao: QuestionsDao) : QuestionRepoHelper {
 
-    override fun insertQuestions(questions: List<Question>) : Observable<Boolean> {
-         questionsDao.insertAll(questions)
-         return Observable.just(true)
+    override fun isQuestionsRepoEmpty(): Observable<Boolean> {
+        return Observable.fromCallable({ questionsDao.loadAll().isEmpty() })
 
     }
 
-    override fun loadQuestions(): List<Question>? {
-        return questionsDao.loadAll()
+    override fun insertQuestions(questions: List<Question>): Observable<Boolean> {
+        questionsDao.insertAll(questions)
+        return Observable.just(true)
+
+
+    }
+
+    override fun loadQuestions(): Observable<List<Question>> {
+        return Observable.fromCallable({ questionsDao.loadAll() })
     }
 }

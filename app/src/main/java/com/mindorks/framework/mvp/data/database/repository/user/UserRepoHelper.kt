@@ -7,5 +7,5 @@ import io.reactivex.Observable
  */
 interface UserRepoHelper {
     fun insertUser(user: User) : Observable<Boolean>
-    fun loadUsers(): List<User>?
+    fun loadUsers(): List<User>
 }

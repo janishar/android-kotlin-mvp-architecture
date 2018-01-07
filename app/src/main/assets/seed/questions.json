@@ -2,17 +2,17 @@
   {
     "id": 1,
     "question_text": "What is the architecture of this app?",
-    "question_img_url": null
+    "question_img_url": "https://avatars3.githubusercontent.com/u/1024025"
   },
   {
     "id": 2,
     "question_text": "Which component of the MVVM controls the data flow?",
-    "question_img_url": null
+    "question_img_url": "https://avatars3.githubusercontent.com/u/1024025"
   },
   {
     "id": 5,
     "question_text": "Why should we follow MVVM?",
-    "question_img_url": null
+    "question_img_url": "https://avatars3.githubusercontent.com/u/1024025"
   },
   {
     "id": 6,

@@ -13,8 +13,8 @@ class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : Op
         return Observable.just(true)
     }
 
-    override fun loadOptions(questionId: String): List<Options>? {
-        return optionsDao.loadAll(questionId)
+    override fun loadOptions(questionId: String): Observable<List<Options>> {
+        return Observable.fromCallable({optionsDao.loadAll(questionId)})
     }
 
 

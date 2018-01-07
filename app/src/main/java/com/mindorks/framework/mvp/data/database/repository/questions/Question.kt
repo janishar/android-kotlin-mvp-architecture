@@ -15,6 +15,7 @@ data class Question(
         @PrimaryKey
         var id: Long,
 
+        @Expose
         @SerializedName("question_text")
         @ColumnInfo(name = "question_text")
         var questionText: String,
@@ -22,16 +23,16 @@ data class Question(
         @Expose
         @SerializedName("question_img_url")
         @ColumnInfo(name = "question_img_url")
-        var imgUrl: String,
+        var imgUrl: String?,
 
         @Expose
         @SerializedName("created_at")
         @ColumnInfo(name = "created_at")
-        var createdAt: String,
+        var createdAt: String?,
 
         @Expose
         @SerializedName("updated_at")
         @ColumnInfo(name = "updated_at")
-        var updatedAt: String
+        var updatedAt: String?
 
 )

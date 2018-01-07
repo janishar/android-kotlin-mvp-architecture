@@ -6,7 +6,8 @@ package com.mindorks.framework.mvp.util
 class AppConstants {
 
     companion object {
-        internal var APP_DB_NAME = "mindorks_mvp.db"
+        internal val APP_DB_NAME = "mindorks_mvp.db"
+        internal val SEED_DATABASE_QUESTIONS = "seed/questions.json"
 
     }
 }
