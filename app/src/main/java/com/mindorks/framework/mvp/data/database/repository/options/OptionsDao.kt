@@ -15,6 +15,8 @@ interface OptionsDao {
     fun insertAll(options: List<Options>)
 
     @Query("SELECT * FROM options WHERE question_id = :questionId")
-    fun loadAll(questionId: String): List<Options>
+    fun loadOptionsByQuestionId(questionId: String): List<Options>
 
+    @Query("SELECT * FROM options")
+    fun loadAll() : List<Options>
 }

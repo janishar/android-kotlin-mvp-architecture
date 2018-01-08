@@ -7,6 +7,7 @@ import io.reactivex.Observable
  */
 interface OptionsRepoHelper {
 
+    fun isOptionsRepoEmpty() : Observable<Boolean>
     fun insertOptions(options: List<Options>): Observable<Boolean>
     fun loadOptions(questionId: String): Observable<List<Options>>
 

@@ -7,6 +7,9 @@ import javax.inject.Inject
  * Created by jyotidubey on 06/01/18.
  */
 class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : OptionsRepoHelper {
+    override fun isOptionsRepoEmpty(): Observable<Boolean> {
+        return Observable.just(optionsDao.loadAll().isEmpty())
+    }
 
     override fun insertOptions(options: List<Options>): Observable<Boolean> {
         optionsDao.insertAll(options)
@@ -14,7 +17,7 @@ class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : Op
     }
 
     override fun loadOptions(questionId: String): Observable<List<Options>> {
-        return Observable.fromCallable({optionsDao.loadAll(questionId)})
+        return Observable.fromCallable({optionsDao.loadOptionsByQuestionId(questionId)})
     }
 
 

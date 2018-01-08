@@ -15,18 +15,14 @@ class MainPresenterImpl<V : MainView, I : MainInteractor> @Inject internal const
 
     fun seedQuestions() {
         compositeDisposable.add(interactor.seedQuestions()
+                .flatMap { interactor.seedOptions() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ t -> if (t) getView().showSuccessToast() else getView().showErrorToast() }))
     }
 
-    fun seedOptions() {
-        compositeDisposable.add(interactor.seedOptions().subscribe())
-    }
-
     override fun onAttach(view: V) {
         super.onAttach(view)
         seedQuestions()
-        seedOptions()
     }
 }
