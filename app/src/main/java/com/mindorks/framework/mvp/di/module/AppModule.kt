@@ -17,6 +17,7 @@ import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.util.AppConstants
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 /**
@@ -69,6 +70,12 @@ class AppModule {
     @Singleton
     internal fun provideUserRepoHelper(appDatabase: AppDatabase): UserRepoHelper {
         return UserRepoHelperImpl(appDatabase.userDao())
+    }
+
+
+    @Provides
+    internal fun provideCompositeDisposable(): CompositeDisposable {
+        return CompositeDisposable()
     }
 
 

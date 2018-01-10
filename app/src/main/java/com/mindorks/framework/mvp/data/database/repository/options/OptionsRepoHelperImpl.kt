@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvp.data.database.repository.options
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -8,6 +9,7 @@ import javax.inject.Inject
  */
 class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : OptionsRepoHelper {
     override fun isOptionsRepoEmpty(): Observable<Boolean> {
+        val i = optionsDao.loadAll().size
         return Observable.just(optionsDao.loadAll().isEmpty())
     }
 
@@ -16,8 +18,8 @@ class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : Op
         return Observable.just(true)
     }
 
-    override fun loadOptions(questionId: String): Observable<List<Options>> {
-        return Observable.fromCallable({optionsDao.loadOptionsByQuestionId(questionId)})
+    override fun loadOptions(questionId: Long): Single<List<Options>> {
+        return Single.fromCallable({optionsDao.loadOptionsByQuestionId(questionId)})
     }
 
 

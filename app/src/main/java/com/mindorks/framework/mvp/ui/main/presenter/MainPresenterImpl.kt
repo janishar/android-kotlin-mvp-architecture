@@ -9,20 +9,26 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
- * Created by jyotidubey on 04/01/18.
+ * Created by jyotidubey on 08/01/18.
  */
 class MainPresenterImpl<V : MainView, I : MainInteractor> @Inject internal constructor(interactor: I, disposable: CompositeDisposable) : BasePresenter<V, I>(interactor, disposable), MainPresenter<V, I> {
 
-    fun seedQuestions() {
-        compositeDisposable.add(interactor.seedQuestions()
-                .flatMap { interactor.seedOptions() }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ t -> if (t) getView().showSuccessToast() else getView().showErrorToast() }))
-    }
-
     override fun onAttach(view: V) {
         super.onAttach(view)
-        seedQuestions()
+        getQuestionCards()
+    }
+
+    override fun refreshQuestionCards() {
+        getQuestionCards()
+    }
+
+    private fun getQuestionCards() {
+        compositeDisposable.add(interactor.getQuestionCardData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { questionCard ->
+                    getView()?.displayQuestionCard(questionCard)
+
+                })
     }
 }

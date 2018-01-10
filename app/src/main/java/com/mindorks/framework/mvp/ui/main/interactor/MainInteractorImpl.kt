@@ -1,61 +1,33 @@
 package com.mindorks.framework.mvp.ui.main.interactor
 
-import android.content.Context
-import com.google.gson.GsonBuilder
-import com.google.gson.internal.`$Gson$Types`
 import com.mindorks.framework.mvp.data.database.repository.options.Options
 import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelper
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelper
 import com.mindorks.framework.mvp.ui.base.interactor.BaseInteractor
-import com.mindorks.framework.mvp.util.AppConstants
-import com.mindorks.framework.mvp.util.FileUtils
-import io.reactivex.Observable
-import io.reactivex.functions.Function
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
- * Created by jyotidubey on 04/01/18.
+ * Created by jyotidubey on 08/01/18.
  */
-class MainInteractorImpl @Inject constructor(val mContext: Context, val questionRepoHelper: QuestionRepoHelper, val optionsRepoHelper: OptionsRepoHelper) : BaseInteractor(), MainInteractor {
+class MainInteractorImpl @Inject internal constructor(val questionRepoHelper: QuestionRepoHelper, val optionsRepoHelper: OptionsRepoHelper) : BaseInteractor(), MainInteractor {
 
-    override fun seedQuestions(): Observable<Boolean> {
-        val builder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-        val gson = builder.create()
-        return questionRepoHelper.isQuestionsRepoEmpty().concatMap(Function
-        { t ->
-            if (t) {
-                val type = `$Gson$Types`.newParameterizedTypeWithOwner(null, List::class.java, Question::class.java)
-                val questionList = gson.fromJson<List<Question>>(
-                        FileUtils.loadJSONFromAsset(
-                                mContext,
-                                AppConstants.SEED_DATABASE_QUESTIONS),
-                        type)
-                questionRepoHelper.insertQuestions(questionList)
-            } else
-                Observable.just(false)
-        }
-        )
+    override fun getQuestionCardData(): Single<List<QuestionCardData>> {
+        return questionRepoHelper.loadQuestions()
+                .flatMapIterable { question -> question }
+                .flatMapSingle { question -> getQuestionCards(question) }
+                .toList()
     }
 
-    override fun seedOptions(): Observable<Boolean> {
-        val builder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-        val gson = builder.create()
-        return optionsRepoHelper.isOptionsRepoEmpty().concatMap(Function
-        { t ->
-            if (t) {
-                val type = `$Gson$Types`.newParameterizedTypeWithOwner(null, List::class.java, Options::class.java)
-                val optionsList = gson.fromJson<List<Options>>(
-                        FileUtils.loadJSONFromAsset(
-                                mContext,
-                                AppConstants.SEED_DATABASE_OPTIONS),
-                        type)
-                optionsRepoHelper.insertOptions(optionsList)
-            } else
-                Observable.just(false)
-        }
-        )
+    fun getQuestionCards(question: Question): Single<QuestionCardData> {
+        return optionsRepoHelper.loadOptions(question.id).map { options-> createQuestionCard(options,question) }
+
+    }
+
+    fun createQuestionCard(options: List<Options>, question: Question): QuestionCardData {
+        return  QuestionCardData(options,question)
+    }
     }
 
 
-}

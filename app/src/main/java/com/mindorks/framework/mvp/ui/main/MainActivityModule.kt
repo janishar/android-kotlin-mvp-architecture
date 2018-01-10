@@ -10,15 +10,11 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 
 /**
- * Created by jyotidubey on 06/01/18.
+ * Created by jyotidubey on 09/01/18.
  */
 @Module
 class MainActivityModule {
 
-    @Provides
-    internal fun provideCompositeDisposable(): CompositeDisposable {
-        return CompositeDisposable()
-    }
 
     @Provides
     internal fun provideMainInteractor(mainInteractorImpl: MainInteractorImpl): MainInteractor {
@@ -26,8 +22,7 @@ class MainActivityModule {
     }
 
     @Provides
-    internal fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl<MainView, MainInteractor>): MainPresenter<MainView,MainInteractor> {
+    internal fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl<MainView, MainInteractor>): MainPresenter<MainView, MainInteractor> {
         return mainPresenterImpl
     }
-
 }

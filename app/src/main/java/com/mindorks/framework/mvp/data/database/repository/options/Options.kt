@@ -16,7 +16,8 @@ import com.mindorks.framework.mvp.data.database.repository.questions.Question
         childColumns = arrayOf("question_id"),
         onDelete = ForeignKey.CASCADE)))
 data class Options(
-        @PrimaryKey var id: Long,
+
+        @PrimaryKey(autoGenerate = true) var id: Long,
 
         @Expose
         @SerializedName("option_text")

@@ -19,5 +19,7 @@ abstract class BasePresenter<V : MVPView, I : MVPInteractor> internal constructo
         return view
     }
 
-
+    fun isViewAttached(): Boolean {
+        return getView() != null
+    }
 }
