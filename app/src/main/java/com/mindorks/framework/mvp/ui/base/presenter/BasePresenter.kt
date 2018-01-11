@@ -2,6 +2,7 @@ package com.mindorks.framework.mvp.ui.base.presenter
 
 import com.mindorks.framework.mvp.ui.base.interactor.MVPInteractor
 import com.mindorks.framework.mvp.ui.base.view.MVPView
+import com.mindorks.framework.mvp.ui.exception.ViewNotAttachedException
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -9,17 +10,20 @@ import io.reactivex.disposables.CompositeDisposable
  */
 abstract class BasePresenter<V : MVPView, I : MVPInteractor> internal constructor(protected val interactor: I, protected val compositeDisposable: CompositeDisposable) : MVPPresenter<V, I> {
 
-    private lateinit var view: V
+    private var view: V? = null
+    private val isViewAttached: Boolean get() = view != null
 
-    override fun onAttach(view: V) {
+    override fun onAttach(view: V?) {
         this.view = view
     }
 
-    override fun getView(): V {
+    override fun getView(): V? {
         return view
     }
 
-    fun isViewAttached(): Boolean {
-        return getView() != null
+    fun throwViewNotAttachedException() {
+        if (!isViewAttached) {
+            throw ViewNotAttachedException()
+        }
     }
 }

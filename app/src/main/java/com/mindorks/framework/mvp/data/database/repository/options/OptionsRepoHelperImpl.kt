@@ -9,7 +9,6 @@ import javax.inject.Inject
  */
 class OptionsRepoHelperImpl @Inject constructor(val optionsDao: OptionsDao) : OptionsRepoHelper {
     override fun isOptionsRepoEmpty(): Observable<Boolean> {
-        val i = optionsDao.loadAll().size
         return Observable.just(optionsDao.loadAll().isEmpty())
     }
 

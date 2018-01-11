@@ -3,17 +3,18 @@ package com.mindorks.framework.mvp.di.module
 import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.mindorks.framework.mvp.BuildConfig
 import com.mindorks.framework.mvp.data.database.AppDatabase
 import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelper
 import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelperImpl
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelper
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelperImpl
-import com.mindorks.framework.mvp.data.database.repository.user.UserRepoHelper
-import com.mindorks.framework.mvp.data.database.repository.user.UserRepoHelperImpl
+import com.mindorks.framework.mvp.data.network.ApiHeader
 import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.network.AppApiHelper
 import com.mindorks.framework.mvp.data.preferences.AppPreferenceHelper
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
+import com.mindorks.framework.mvp.di.PreferenceInfo
 import com.mindorks.framework.mvp.util.AppConstants
 import dagger.Module
 import dagger.Provides
@@ -43,16 +44,34 @@ class AppModule {
     }
 
     @Provides
-    @Singleton
-    internal fun provideApiHelper(): ApiHelper {
-        return AppApiHelper()
+    internal fun provideApiKey(): String {
+        return BuildConfig.API_KEY
+    }
+
+    @Provides
+    @PreferenceInfo
+    internal fun provideprefFileName(): String {
+        return AppConstants.PREF_NAME
     }
 
     @Provides
     @Singleton
-    internal fun providePrefHelper(): PreferenceHelper {
-        return AppPreferenceHelper()
+    internal fun providePrefHelper(appPreferenceHelper: AppPreferenceHelper): PreferenceHelper {
+        return appPreferenceHelper
     }
+
+    @Provides
+    @Singleton
+    internal fun provideProtectedApiHeader(apiKey: String, preferenceHelper: PreferenceHelper): ApiHeader.ProtectedApiHeader {
+        return ApiHeader.ProtectedApiHeader(apiKey = apiKey, userId = preferenceHelper.getCurrentUserId(), accessToken = preferenceHelper.getAccessToken())
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper {
+        return appApiHelper
+    }
+
 
     @Provides
     @Singleton
@@ -65,13 +84,6 @@ class AppModule {
     internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepoHelper {
         return OptionsRepoHelperImpl(appDatabase.optionsDao())
     }
-
-    @Provides
-    @Singleton
-    internal fun provideUserRepoHelper(appDatabase: AppDatabase): UserRepoHelper {
-        return UserRepoHelperImpl(appDatabase.userDao())
-    }
-
 
     @Provides
     internal fun provideCompositeDisposable(): CompositeDisposable {

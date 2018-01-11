@@ -21,13 +21,13 @@ class MainInteractorImpl @Inject internal constructor(val questionRepoHelper: Qu
     }
 
     fun getQuestionCards(question: Question): Single<QuestionCardData> {
-        return optionsRepoHelper.loadOptions(question.id).map { options-> createQuestionCard(options,question) }
+        return optionsRepoHelper.loadOptions(question.id).map { options -> createQuestionCard(options, question) }
 
     }
 
     fun createQuestionCard(options: List<Options>, question: Question): QuestionCardData {
-        return  QuestionCardData(options,question)
+        return QuestionCardData(options, question)
     }
-    }
+}
 
 

@@ -19,13 +19,13 @@ class SplashPresenterImpl<V : SplashView, I : SplashInteractor> @Inject internal
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (getView()!=null) {
+                    if (getView() != null) {
                         decideActivityToOpen()
                     }
                 }))
     }
 
-    override fun onAttach(view: V) {
+    override fun onAttach(view: V?) {
         super.onAttach(view)
         feedInDatabase()
 
@@ -33,14 +33,14 @@ class SplashPresenterImpl<V : SplashView, I : SplashInteractor> @Inject internal
 
     fun decideActivityToOpen() {
         if (isUserLoggedIn()) {
-            getView().openMainActivity()
+            getView()?.openMainActivity()
         } else {
-            getView().openLoginActivity()
+            getView()?.openLoginActivity()
         }
     }
 
     fun isUserLoggedIn(): Boolean {
-        return true
+        return interactor.isUserLoggedIn()
     }
 
 }

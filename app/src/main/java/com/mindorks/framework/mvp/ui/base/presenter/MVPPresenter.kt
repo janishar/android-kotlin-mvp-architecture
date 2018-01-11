@@ -7,6 +7,6 @@ import com.mindorks.framework.mvp.ui.base.view.MVPView
  * Created by jyotidubey on 04/01/18.
  */
 interface MVPPresenter<V : MVPView, I : MVPInteractor> {
-    fun onAttach(view: V)
-    fun getView(): V
+    fun onAttach(view: V?)
+    fun getView(): V?
 }

@@ -1,3 +1,11 @@
 <resources>
   <string name="app_name">Kotlin MVP</string>
+  <string name="login_dummy">Login Dummy</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="login">Login</string>
+  <string name="empty_email_error_message">Email cannot be blank</string>
+  <string name="invalid_email_error_message">Please Enter a valid email address</string>
+  <string name="empty_password_error_message">Password cannot be empty</string>
+  <string name="login_failure">Login failed</string>
 </resources>

@@ -7,6 +7,7 @@ import com.mindorks.framework.mvp.data.database.repository.options.Options
 import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelper
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelper
+import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.ui.base.interactor.BaseInteractor
 import com.mindorks.framework.mvp.util.AppConstants
 import com.mindorks.framework.mvp.util.FileUtils
@@ -17,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class SplashInteractorImpl @Inject constructor(val mContext: Context, val questionRepoHelper: QuestionRepoHelper, val optionsRepoHelper: OptionsRepoHelper) : BaseInteractor(), SplashInteractor {
+class SplashInteractorImpl @Inject constructor(val mContext: Context, val questionRepoHelper: QuestionRepoHelper, val optionsRepoHelper: OptionsRepoHelper, val preferenceHelper: PreferenceHelper) : BaseInteractor(preferenceHelper = preferenceHelper), SplashInteractor {
 
     override fun getQuestion(): Observable<List<Question>> {
         return questionRepoHelper.loadQuestions()
@@ -26,8 +27,7 @@ class SplashInteractorImpl @Inject constructor(val mContext: Context, val questi
     override fun seedQuestions(): Observable<Boolean> {
         val builder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
         val gson = builder.create()
-        return questionRepoHelper.isQuestionsRepoEmpty().concatMap(Function
-        { t ->
+        return questionRepoHelper.isQuestionsRepoEmpty().concatMap({ t ->
             if (t) {
                 val type = `$Gson$Types`.newParameterizedTypeWithOwner(null, List::class.java, Question::class.java)
                 val questionList = gson.fromJson<List<Question>>(

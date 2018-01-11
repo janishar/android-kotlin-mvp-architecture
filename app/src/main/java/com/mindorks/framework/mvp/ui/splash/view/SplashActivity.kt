@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.ui.base.view.BaseActivity
+import com.mindorks.framework.mvp.ui.login.view.LoginActivity
 import com.mindorks.framework.mvp.ui.main.view.MainActivity
 import com.mindorks.framework.mvp.ui.splash.interactor.SplashInteractor
 import com.mindorks.framework.mvp.ui.splash.presenter.SplashPresenter
@@ -36,6 +37,9 @@ class SplashActivity : BaseActivity(), SplashView {
     }
 
     override fun openLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
