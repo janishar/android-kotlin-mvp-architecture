@@ -16,11 +16,10 @@ class QuestionRepoHelperImpl @Inject internal constructor(private val questionsD
     override fun insertQuestions(questions: List<Question>): Observable<Boolean> {
         questionsDao.insertAll(questions)
         return Observable.just(true)
-
-
     }
 
     override fun loadQuestions(): Observable<List<Question>> {
         return Observable.fromCallable({ questionsDao.loadAll() })
     }
+
 }

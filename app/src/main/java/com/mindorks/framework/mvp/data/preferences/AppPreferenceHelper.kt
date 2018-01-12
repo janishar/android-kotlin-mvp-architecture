@@ -9,22 +9,21 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class AppPreferenceHelper @Inject constructor(private val context: Context,
+class AppPreferenceHelper @Inject constructor(context: Context,
                                               @PreferenceInfo private val prefFileName: String) : PreferenceHelper {
 
 
     private var mPrefs: SharedPreferences = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE)
 
     companion object {
+
         private val PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE"
         private val PREF_KEY_CURRENT_USER_ID = "PREF_KEY_CURRENT_USER_ID"
         private val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
         private val PREF_KEY_CURRENT_USER_NAME = "PREF_KEY_CURRENT_USER_NAME"
         private val PREF_KEY_CURRENT_USER_EMAIL = "PREF_KEY_CURRENT_USER_EMAIL"
 
-
     }
-
 
     override fun getCurrentUserLoggedInMode(): Int {
         return mPrefs.getInt(PREF_KEY_USER_LOGGED_IN_MODE, AppConstants.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.type)

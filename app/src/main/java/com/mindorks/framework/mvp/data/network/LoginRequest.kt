@@ -7,10 +7,11 @@ import com.google.gson.annotations.SerializedName
  * Created by jyotidubey on 11/01/18.
  */
 class LoginRequest {
+
     class ServerLoginRequest internal constructor(@Expose
-                             @SerializedName("email") internal val email: String,
-                             @Expose
-                             @SerializedName("password") internal val password: String) {
+                                                  @SerializedName("email") internal val email: String,
+                                                  @Expose
+                                                  @SerializedName("password") internal val password: String) {
 
         override fun equals(`object`: Any?): Boolean {
             if (this === `object`) return true
@@ -32,11 +33,11 @@ class LoginRequest {
     }
 
     class FacebookLoginRequest internal constructor(@Expose
-                               @SerializedName("fb_user_id")
-                               internal val fbUserId: String,
-                               @Expose
-                               @SerializedName("fb_access_token")
-                               internal val fbAccessToken: String) {
+                                                    @SerializedName("fb_user_id")
+                                                    internal val fbUserId: String,
+                                                    @Expose
+                                                    @SerializedName("fb_access_token")
+                                                    internal val fbAccessToken: String) {
 
         override fun equals(`object`: Any?): Boolean {
             if (this === `object`) return true

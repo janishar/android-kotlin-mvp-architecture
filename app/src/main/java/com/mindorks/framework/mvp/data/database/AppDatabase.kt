@@ -10,9 +10,11 @@ import com.mindorks.framework.mvp.data.database.repository.questions.QuestionsDa
 /**
  * Created by jyotidubey on 03/01/18.
  */
-@Database(entities = arrayOf(Question::class, Options::class), version = 1)
+@Database(entities = [(Question::class), (Options::class)], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun optionsDao(): OptionsDao
+
     abstract fun questionsDao(): QuestionsDao
+
 }

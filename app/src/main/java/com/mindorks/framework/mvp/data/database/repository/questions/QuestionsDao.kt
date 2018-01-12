@@ -10,9 +10,11 @@ import android.arch.persistence.room.Query
  */
 @Dao
 interface QuestionsDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(question: List<Question>)
 
     @Query("SELECT * FROM questions")
     fun loadAll(): List<Question>
+
 }

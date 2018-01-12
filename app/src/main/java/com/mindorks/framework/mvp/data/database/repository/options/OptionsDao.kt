@@ -18,5 +18,5 @@ interface OptionsDao {
     fun loadOptionsByQuestionId(questionId: Long): List<Options>
 
     @Query("SELECT * FROM options")
-    fun loadAll() : List<Options>
+    fun loadAll(): List<Options>
 }

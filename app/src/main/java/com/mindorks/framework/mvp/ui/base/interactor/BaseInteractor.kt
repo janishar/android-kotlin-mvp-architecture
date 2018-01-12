@@ -7,6 +7,7 @@ import com.mindorks.framework.mvp.util.AppConstants
  * Created by jyotidubey on 04/01/18.
  */
 open class BaseInteractor() : MVPInteractor {
+
     private lateinit var preferenceHelper: PreferenceHelper
 
     constructor(preferenceHelper: PreferenceHelper) : this() {

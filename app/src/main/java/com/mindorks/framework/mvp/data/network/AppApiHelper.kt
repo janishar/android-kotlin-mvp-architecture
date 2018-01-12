@@ -30,6 +30,7 @@ class AppApiHelper @Inject constructor(private val apiHeader: ApiHeader) : ApiHe
                 .addHeaders(apiHeader.publicApiHeader)
                 .addBodyParameter(request)
                 .build()
-                .getObjectObservable(LoginResponse::class.java)    }
+                .getObjectObservable(LoginResponse::class.java)
+    }
 
 }
