@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group>
+    <item
+      android:id="@+id/nav_item_about"
+      android:checked="true"
+      android:icon="@drawable/ic_info_24px"
+      android:title="@string/about" />
+    <item
+      android:id="@+id/nav_item_rate_us"
+      android:checked="true"
+      android:icon="@drawable/ic_star"
+      android:title="@string/rate_us" />
+    <item
+      android:id="@+id/nav_item_feed"
+      android:checked="true"
+      android:icon="@drawable/ic_rss_symbol"
+      android:title="@string/feed" />
+    <item
+      android:id="@+id/nav_item_logout"
+      android:checked="true"
+      android:icon="@drawable/ic_power_settings_new_24px"
+      android:title="@string/logout" />
+  </group>
+</menu>
