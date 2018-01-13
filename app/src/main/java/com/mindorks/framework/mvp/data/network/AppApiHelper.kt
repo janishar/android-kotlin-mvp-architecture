@@ -33,7 +33,7 @@ class AppApiHelper @Inject constructor(private val apiHeader: ApiHeader) : ApiHe
                 .getObjectObservable(LoginResponse::class.java)
     }
 
-    override fun perfromLogoutApiCall(): Observable<LogoutResponse> {
+    override fun performLogoutApiCall(): Observable<LogoutResponse> {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_LOGOUT)
                 .addHeaders(apiHeader.protectedApiHeader)
                 .build()

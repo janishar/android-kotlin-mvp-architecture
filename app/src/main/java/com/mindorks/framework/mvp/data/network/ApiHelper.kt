@@ -13,6 +13,6 @@ interface ApiHelper {
 
     fun performGoogleLogin(request: LoginRequest.GoogleLoginRequest): Observable<LoginResponse>
 
-    fun perfromLogoutApiCall(): Observable<LogoutResponse>
+    fun performLogoutApiCall(): Observable<LogoutResponse>
 
 }

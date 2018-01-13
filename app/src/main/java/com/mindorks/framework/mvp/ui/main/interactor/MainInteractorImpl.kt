@@ -38,7 +38,7 @@ class MainInteractorImpl @Inject internal constructor(private val questionRepoHe
     }
 
     override fun makeLogoutApiCall(): Observable<LogoutResponse> {
-        return apiHelper.perfromLogoutApiCall()
+        return apiHelper.performLogoutApiCall()
     }
 }
 
