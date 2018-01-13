@@ -6,7 +6,7 @@ import io.reactivex.Single
 /**
  * Created by jyotidubey on 06/01/18.
  */
-interface OptionsRepoHelper {
+interface OptionsRepo {
 
     fun isOptionsRepoEmpty(): Observable<Boolean>
 

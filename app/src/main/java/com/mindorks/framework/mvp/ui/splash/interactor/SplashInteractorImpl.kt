@@ -4,9 +4,10 @@ import android.content.Context
 import com.google.gson.GsonBuilder
 import com.google.gson.internal.`$Gson$Types`
 import com.mindorks.framework.mvp.data.database.repository.options.Options
-import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelper
+import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepo
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
-import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelper
+import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepo
+import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.ui.base.interactor.BaseInteractor
 import com.mindorks.framework.mvp.util.AppConstants
@@ -18,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class SplashInteractorImpl @Inject constructor(val mContext: Context, val questionRepoHelper: QuestionRepoHelper, val optionsRepoHelper: OptionsRepoHelper, val preferenceHelper: PreferenceHelper) : BaseInteractor(preferenceHelper = preferenceHelper), SplashInteractor {
+class SplashInteractorImpl @Inject constructor(private val mContext: Context, private val questionRepoHelper: QuestionRepo, private val optionsRepoHelper: OptionsRepo, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper, apiHelper), SplashInteractor {
 
     override fun getQuestion(): Observable<List<Question>> {
         return questionRepoHelper.loadQuestions()

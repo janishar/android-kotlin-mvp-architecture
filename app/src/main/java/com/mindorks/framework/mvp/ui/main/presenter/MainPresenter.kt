@@ -7,7 +7,13 @@ import com.mindorks.framework.mvp.ui.main.view.MainView
 /**
  * Created by jyotidubey on 08/01/18.
  */
-interface MainPresenter<V : MainView, I : MainInteractor> : MVPPresenter<V,I>{
+interface MainPresenter<V : MainView, I : MainInteractor> : MVPPresenter<V, I> {
 
     fun refreshQuestionCards()
+    fun onDrawerOptionAboutClick()
+    fun onDrawerOptionRateUsClick()
+    fun onDrawerOptionFeedClick()
+    fun onDrawerOptionLogoutClick()
+
+
 }

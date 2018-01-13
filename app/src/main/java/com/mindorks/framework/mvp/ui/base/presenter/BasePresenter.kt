@@ -2,7 +2,6 @@ package com.mindorks.framework.mvp.ui.base.presenter
 
 import com.mindorks.framework.mvp.ui.base.interactor.MVPInteractor
 import com.mindorks.framework.mvp.ui.base.view.MVPView
-import com.mindorks.framework.mvp.ui.exception.ViewNotAttachedException
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -21,9 +20,4 @@ abstract class BasePresenter<V : MVPView, I : MVPInteractor> internal constructo
         return view
     }
 
-    fun throwViewNotAttachedException() {
-        if (!isViewAttached) {
-            throw ViewNotAttachedException()
-        }
-    }
 }

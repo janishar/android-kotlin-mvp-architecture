@@ -5,10 +5,10 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.mindorks.framework.mvp.BuildConfig
 import com.mindorks.framework.mvp.data.database.AppDatabase
-import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelper
-import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoHelperImpl
-import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelper
-import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoHelperImpl
+import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepo
+import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoImpl
+import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepo
+import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoImpl
 import com.mindorks.framework.mvp.data.network.ApiHeader
 import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.network.AppApiHelper
@@ -75,14 +75,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideQuestionRepoHelper(appDatabase: AppDatabase): QuestionRepoHelper {
-        return QuestionRepoHelperImpl(appDatabase.questionsDao())
+    internal fun provideQuestionRepoHelper(appDatabase: AppDatabase): QuestionRepo {
+        return QuestionRepoImpl(appDatabase.questionsDao())
     }
 
     @Provides
     @Singleton
-    internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepoHelper {
-        return OptionsRepoHelperImpl(appDatabase.optionsDao())
+    internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepo {
+        return OptionsRepoImpl(appDatabase.optionsDao())
     }
 
     @Provides

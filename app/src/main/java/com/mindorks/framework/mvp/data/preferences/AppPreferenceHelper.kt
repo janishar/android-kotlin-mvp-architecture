@@ -47,7 +47,7 @@ class AppPreferenceHelper @Inject constructor(context: Context,
     }
 
     override fun getCurrentUserName(): String {
-        return mPrefs.getString(PREF_KEY_CURRENT_USER_NAME, null)
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_NAME, "ABC")
     }
 
     override fun setCurrentUserName(userName: String?) {
@@ -55,10 +55,10 @@ class AppPreferenceHelper @Inject constructor(context: Context,
     }
 
     override fun getCurrentUserEmail(): String {
-        return mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL, null)
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL, "abc@gmail.com")
     }
 
-    override fun setCurrentUserEmail(email: String) {
+    override fun setCurrentUserEmail(email: String?) {
         mPrefs.edit().putString(PREF_KEY_CURRENT_USER_EMAIL, email).apply()
     }
 

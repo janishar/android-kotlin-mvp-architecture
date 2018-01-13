@@ -17,7 +17,6 @@ import javax.inject.Inject
  */
 class LoginActivity : BaseActivity(), LoginView {
 
-
     @Inject
     internal lateinit var presenter: LoginPresenter<LoginView, LoginInteractor>
 
@@ -27,6 +26,14 @@ class LoginActivity : BaseActivity(), LoginView {
         presenter.onAttach(this)
         setOnClickListeners()
 
+    }
+
+    override fun onFragmentDetached(tag: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onFragmentAttached() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showValidationMessage(errorCode: Int) {
@@ -44,6 +51,7 @@ class LoginActivity : BaseActivity(), LoginView {
         startActivity(intent)
         finish()
     }
+
 
     fun setOnClickListeners() {
         btn_server_login.setOnClickListener { presenter.onServerLoginClicked(et_email.text.toString(), et_password.text.toString()) }

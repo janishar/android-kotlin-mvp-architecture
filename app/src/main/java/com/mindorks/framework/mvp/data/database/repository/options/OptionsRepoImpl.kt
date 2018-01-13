@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 06/01/18.
  */
-class OptionsRepoHelperImpl @Inject constructor(private val optionsDao: OptionsDao) : OptionsRepoHelper {
+class OptionsRepoImpl @Inject constructor(private val optionsDao: OptionsDao) : OptionsRepo {
 
     override fun isOptionsRepoEmpty(): Observable<Boolean> {
         return Observable.just(optionsDao.loadAll().isEmpty())

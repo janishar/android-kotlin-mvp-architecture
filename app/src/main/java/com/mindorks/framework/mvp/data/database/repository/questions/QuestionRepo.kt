@@ -5,7 +5,7 @@ import io.reactivex.Observable
 /**
  * Created by jyotidubey on 06/01/18.
  */
-interface QuestionRepoHelper {
+interface QuestionRepo {
 
     fun isQuestionsRepoEmpty(): Observable<Boolean>
 

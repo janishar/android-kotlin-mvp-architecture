@@ -33,7 +33,7 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
     @Resolve
     private fun onResolved() {
 
-        mQuestionTextView!!.text = mQuestion.question.questionText
+        mQuestionTextView.text = mQuestion.question.questionText
 
         for (i in 0..2) {
             var button: Button? = null
@@ -43,7 +43,7 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
                 2 -> button = mOption3Button
             }
 
-            button!!.text = mQuestion.option[i].optionText
+            button?.text = mQuestion.option[i].optionText
 
             if(mQuestion.question.imgUrl != null) {
                 mPicImageView.setImageUrl(mQuestion.question.imgUrl)
@@ -87,8 +87,4 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
         showCorrectOptions()
     }
 
-    companion object {
-
-        private val TAG = "QuestionCard"
-    }
 }

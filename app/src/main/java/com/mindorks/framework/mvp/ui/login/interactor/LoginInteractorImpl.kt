@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 10/01/18.
  */
-class LoginInteractorImpl @Inject internal constructor(val apiHelper: ApiHelper, val preferenceHelper: PreferenceHelper) : BaseInteractor(), LoginInteractor {
+class LoginInteractorImpl @Inject internal constructor(preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper, apiHelper), LoginInteractor {
 
     override fun doGoogleLoginApiCall(): Observable<LoginResponse> {
         return apiHelper.performGoogleLogin(LoginRequest.GoogleLoginRequest("test1", "test1"))

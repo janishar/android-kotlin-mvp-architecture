@@ -22,6 +22,14 @@ class SplashActivity : BaseActivity(), SplashView {
         presenter.onAttach(this)
     }
 
+    override fun onFragmentDetached(tag: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onFragmentAttached() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun showSuccessToast() {
         Toast.makeText(this, "Testing:: Questions Added Successfully", Toast.LENGTH_LONG).show()
     }
