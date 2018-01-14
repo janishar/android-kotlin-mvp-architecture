@@ -1,6 +1,5 @@
 package com.mindorks.framework.mvp.ui.main.presenter
 
-import com.mindorks.framework.mvp.data.network.LogoutResponse
 import com.mindorks.framework.mvp.ui.base.presenter.BasePresenter
 import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
 import com.mindorks.framework.mvp.ui.main.view.MainView
@@ -30,7 +29,7 @@ class MainPresenterImpl<V : MainView, I : MainInteractor> @Inject internal const
     }
 
     override fun onDrawerOptionFeedClick() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        getView()?.openFeedActivity()
     }
 
     override fun onDrawerOptionLogoutClick() {

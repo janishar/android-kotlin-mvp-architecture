@@ -9,6 +9,7 @@ import javax.inject.Inject
  */
 class AppApiHelper @Inject constructor(private val apiHeader: ApiHeader) : ApiHelper {
 
+
     override fun performServerLogin(request: LoginRequest.ServerLoginRequest): Observable<LoginResponse> {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LOGIN)
                 .addHeaders(apiHeader.publicApiHeader)
@@ -39,5 +40,18 @@ class AppApiHelper @Inject constructor(private val apiHeader: ApiHeader) : ApiHe
                 .build()
                 .getObjectObservable(LogoutResponse::class.java)
     }
+
+    override fun getBlogApiCall(): Observable<BlogResponse> {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_BLOG)
+                .addHeaders(apiHeader.protectedApiHeader)
+                .build()
+                .getObjectObservable(BlogResponse::class.java)
+    }
+
+    override fun getOpenSourceApiCall(): Observable<OpenSourceResponse> {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_OPEN_SOURCE)
+                .addHeaders(apiHeader.protectedApiHeader)
+                .build()
+                .getObjectObservable(OpenSourceResponse::class.java)    }
 
 }

@@ -10,6 +10,7 @@ interface MainView  : MVPView{
     fun inflateUserDetails(userDetails: Pair<String?,String?>)
     fun displayQuestionCard(questionCard : List<QuestionCardData>)
     fun openLoginActivity()
+    fun openFeedActivity()
     fun openAboutFragment()
     fun lockDrawer()
     fun unlockDrawer()

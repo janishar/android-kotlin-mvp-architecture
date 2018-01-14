@@ -1,5 +1,8 @@
 package com.mindorks.framework.mvp.di.builder
 
+import com.mindorks.framework.mvp.ui.feed.blog.BlogFragmentProvider
+import com.mindorks.framework.mvp.ui.feed.opensource.OpenSourceFragmentProvider
+import com.mindorks.framework.mvp.ui.feed.view.FeedActivity
 import com.mindorks.framework.mvp.ui.login.LoginActivityModule
 import com.mindorks.framework.mvp.ui.login.view.LoginActivity
 import com.mindorks.framework.mvp.ui.main.MainActivityModule
@@ -23,4 +26,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = arrayOf(LoginActivityModule::class))
     abstract fun bindLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector(modules = arrayOf(BlogFragmentProvider::class, OpenSourceFragmentProvider::class))
+    abstract fun bindFeedActivity(): FeedActivity
 }

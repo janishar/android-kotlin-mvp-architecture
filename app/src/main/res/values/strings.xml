@@ -26,4 +26,7 @@
   <string name="link_mindorks_blog">3. https://blog.mindorks.com</string>
   <string name="link_mindorks_repo">4. https://github.com/MindorksOpenSource</string>
   <string name="version">"version"</string>
+  <string name="title">Feed</string>
+  <string name="blogs">Blogs</string>
+  <string name="open_source">Open Source</string>
 </resources>

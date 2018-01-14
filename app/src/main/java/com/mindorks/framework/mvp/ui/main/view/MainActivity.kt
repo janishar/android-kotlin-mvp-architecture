@@ -11,6 +11,7 @@ import android.view.MenuItem
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.ui.about.view.AboutFragment
 import com.mindorks.framework.mvp.ui.base.view.BaseActivity
+import com.mindorks.framework.mvp.ui.feed.view.FeedActivity
 import com.mindorks.framework.mvp.ui.login.view.LoginActivity
 import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
 import com.mindorks.framework.mvp.ui.main.interactor.QuestionCardData
@@ -118,6 +119,11 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         supportFragmentManager.beginTransaction().disallowAddToBackStack().setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.cl_root_view, AboutFragment.newInstance(), AboutFragment.TAG)
                 .commit()
+    }
+
+    override fun openFeedActivity() {
+        val intent = Intent(this, FeedActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setUpDrawerMenu() {
