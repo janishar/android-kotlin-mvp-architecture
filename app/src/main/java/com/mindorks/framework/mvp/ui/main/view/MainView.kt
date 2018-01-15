@@ -12,6 +12,7 @@ interface MainView  : MVPView{
     fun openLoginActivity()
     fun openFeedActivity()
     fun openAboutFragment()
+    fun openRateUsDailog()
     fun lockDrawer()
     fun unlockDrawer()
 }

@@ -25,7 +25,7 @@ class MainPresenterImpl<V : MainView, I : MainInteractor> @Inject internal const
     }
 
     override fun onDrawerOptionRateUsClick() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        getView()?.openRateUsDailog()
     }
 
     override fun onDrawerOptionFeedClick() {

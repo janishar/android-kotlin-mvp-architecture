@@ -42,9 +42,9 @@ class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogA
     inner class BlogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun clear() {
-            itemView.cover_image_view.setImageDrawable(null)
-            itemView.title_text_view.text = ""
-            itemView.content_text_view.text = ""
+            itemView.coverImageView.setImageDrawable(null)
+            itemView.titleTextView.text = ""
+            itemView.contentTextView.text = ""
         }
 
         fun onBind(position: Int) {
@@ -54,12 +54,12 @@ class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogA
                         .load(blog.coverImgUrl)
                         .asBitmap()
                         .centerCrop()
-                        .into(itemView.cover_image_view)
+                        .into(itemView.coverImageView)
             }
-            blog.title?.let { itemView.title_text_view.text = it }
-            blog.author?.let { itemView.author_text_view.text = it }
-            blog.date?.let { itemView.date_text_view.text = it }
-            blog.description?.let { itemView.content_text_view.text = it }
+            blog.title?.let { itemView.titleTextView.text = it }
+            blog.author?.let { itemView.authorTextView.text = it }
+            blog.date?.let { itemView.dateTextView.text = it }
+            blog.description?.let { itemView.contentTextView.text = it }
 
             itemView.setOnClickListener {
                 blog.blogUrl?.let {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
@@ -16,17 +17,23 @@ import com.mindorks.framework.mvp.ui.login.view.LoginActivity
 import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
 import com.mindorks.framework.mvp.ui.main.interactor.QuestionCardData
 import com.mindorks.framework.mvp.ui.main.presenter.MainPresenter
+import com.mindorks.framework.mvp.ui.rate.view.RateUsDialog
 import com.mindorks.framework.mvp.util.ScreenUtils
 import com.mindorks.placeholderview.SwipeDecor
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
 import kotlinx.android.synthetic.main.nav_header_navigation.view.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSelectedListener {
-
+class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
     @Inject
     internal lateinit var presenter: MainPresenter<MainView, MainInteractor>
+
+    @Inject
+    internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,16 +78,16 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_item_about -> {
+            R.id.navItemAbout -> {
                 presenter.onDrawerOptionAboutClick()
             }
-            R.id.nav_item_rate_us -> {
+            R.id.navItemRateUs -> {
                 presenter.onDrawerOptionRateUsClick()
             }
-            R.id.nav_item_feed -> {
+            R.id.navItemFeed -> {
                 presenter.onDrawerOptionFeedClick()
             }
-            R.id.nav_item_logout -> {
+            R.id.navItemLogout -> {
                 presenter.onDrawerOptionLogoutClick()
             }
         }
@@ -103,8 +110,8 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     }
 
     override fun inflateUserDetails(userDetails: Pair<String?, String?>) {
-        nav_view.getHeaderView(0).nav_name.text = userDetails.first
-        nav_view.getHeaderView(0).nav_email.text = userDetails.second
+        navView.getHeaderView(0).nav_name.text = userDetails.first
+        navView.getHeaderView(0).nav_email.text = userDetails.second
 
     }
 
@@ -126,6 +133,17 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         startActivity(intent)
     }
 
+    override fun openRateUsDailog() {
+        RateUsDialog.newInstance()?.let {
+            it.show(supportFragmentManager)
+        }
+    }
+
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return fragmentDispatchingAndroidInjector
+    }
+
     private fun setUpDrawerMenu() {
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
@@ -133,7 +151,7 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        navView.setNavigationItemSelectedListener(this)
 
     }
 

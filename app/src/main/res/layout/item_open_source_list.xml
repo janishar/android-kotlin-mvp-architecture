@@ -22,14 +22,14 @@
       android:paddingBottom="30dp">
 
       <ImageView
-        android:id="@+id/cover_image_view"
+        android:id="@+id/coverImageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="fitCenter"
         tools:src="@drawable/ic_rabbit" />
 
       <TextView
-        android:id="@+id/title_text_view"
+        android:id="@+id/titleTextView"
         style="@style/TextStyle.Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         tools:text="Android MVP Architecture" />
 
       <TextView
-        android:id="@+id/content_text_view"
+        android:id="@+id/contentTextView"
         style="@style/TextStyle.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

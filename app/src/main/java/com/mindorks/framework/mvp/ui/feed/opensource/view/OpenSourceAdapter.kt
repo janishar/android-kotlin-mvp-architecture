@@ -42,9 +42,9 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
     inner class OpenSourceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun clear() {
-            itemView.cover_image_view.setImageDrawable(null)
-            itemView.title_text_view.text = ""
-            itemView.content_text_view.text = ""
+            itemView.coverImageView.setImageDrawable(null)
+            itemView.titleTextView.text = ""
+            itemView.contentTextView.text = ""
         }
 
         fun onBind(position: Int) {
@@ -54,10 +54,10 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
                         .load(openSource.coverImgUrl)
                         .asBitmap()
                         .centerCrop()
-                        .into(itemView.cover_image_view)
+                        .into(itemView.coverImageView)
             }
-            openSource.title?.let { itemView.title_text_view.text = it }
-            openSource.description?.let { itemView.content_text_view.text = it }
+            openSource.title?.let { itemView.titleTextView.text = it }
+            openSource.description?.let { itemView.contentTextView.text = it }
 
             itemView.setOnClickListener {
                 openSource.projectUrl?.let {

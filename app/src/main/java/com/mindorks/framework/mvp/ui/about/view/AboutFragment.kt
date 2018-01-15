@@ -13,21 +13,23 @@ import kotlinx.android.synthetic.main.fragment_about.*
  */
 class AboutFragment : BaseFragment() {
 
-
     companion object {
         internal val TAG = "AboutFragment"
+        private var instance: AboutFragment? = null
         internal fun newInstance(): AboutFragment {
-            return AboutFragment()
+            if (instance == null) {
+                instance = AboutFragment()
+            }
+            return instance as AboutFragment
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_about, container, false)
-        return view
+        return inflater?.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun setUp() {
-        nav_back_btn.setOnClickListener { getBaseActivity()?.onFragmentDetached(TAG) }
+        navBackBtn.setOnClickListener { getBaseActivity()?.onFragmentDetached(TAG) }
     }
 
 
