@@ -18,15 +18,16 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = arrayOf(SplashActivityModule::class))
+    @ContributesAndroidInjector(modules = [(SplashActivityModule::class)])
     abstract fun bindSplashActivity(): SplashActivity
 
-    @ContributesAndroidInjector(modules = arrayOf(MainActivityModule::class))
+    @ContributesAndroidInjector(modules = [(MainActivityModule::class)])
     abstract fun bindMainActivity(): MainActivity
 
-    @ContributesAndroidInjector(modules = arrayOf(LoginActivityModule::class))
+    @ContributesAndroidInjector(modules = [(LoginActivityModule::class)])
     abstract fun bindLoginActivity(): LoginActivity
 
-    @ContributesAndroidInjector(modules = arrayOf(BlogFragmentProvider::class, OpenSourceFragmentProvider::class))
+    @ContributesAndroidInjector(modules = [(BlogFragmentProvider::class), (OpenSourceFragmentProvider::class)])
     abstract fun bindFeedActivity(): FeedActivity
+
 }
