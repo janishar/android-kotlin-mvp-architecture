@@ -3,26 +3,27 @@ package com.mindorks.framework.mvp.ui.splash.presenter
 import com.mindorks.framework.mvp.ui.base.presenter.BasePresenter
 import com.mindorks.framework.mvp.ui.splash.interactor.SplashInteractor
 import com.mindorks.framework.mvp.ui.splash.view.SplashView
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.mindorks.framework.mvp.util.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class SplashPresenterImpl<V : SplashView, I : SplashInteractor> @Inject internal constructor(interactor: I, disposable: CompositeDisposable) : BasePresenter<V, I>(interactor, disposable), SplashPresenter<V, I> {
+class SplashPresenterImpl<V : SplashView, I : SplashInteractor> @Inject internal constructor(interactor: I, schedulerProvider: SchedulerProvider, disposable: CompositeDisposable) : BasePresenter<V, I>(interactor = interactor, schedulerProvider = schedulerProvider, compositeDisposable = disposable), SplashPresenter<V, I> {
 
     fun feedInDatabase() {
-        compositeDisposable.add(interactor.seedQuestions()
-                .flatMap { interactor.seedOptions() }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (getView() != null) {
-                        decideActivityToOpen()
-                    }
-                }))
+        interactor?.let {
+            compositeDisposable.add(it.seedQuestions()
+                    .flatMap { interactor?.seedOptions() }
+                    .compose(schedulerProvider.ioToMainObservableScheduler())
+                    .subscribe({
+                        if (getView() != null) {
+                            decideActivityToOpen()
+                        }
+                    }))
+        }
+
     }
 
     override fun onAttach(view: V?) {
@@ -40,7 +41,8 @@ class SplashPresenterImpl<V : SplashView, I : SplashInteractor> @Inject internal
     }
 
     fun isUserLoggedIn(): Boolean {
-        return interactor.isUserLoggedIn()
+        interactor?.let { return it.isUserLoggedIn() }
+        return false
     }
 
 }

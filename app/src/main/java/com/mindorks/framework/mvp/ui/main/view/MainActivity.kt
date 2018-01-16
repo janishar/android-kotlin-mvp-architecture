@@ -44,6 +44,12 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
     }
 
+    override fun onDestroy() {
+        presenter.onDetach()
+        super.onDestroy()
+    }
+
+
     override fun onFragmentDetached(tag: String) {
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(tag)

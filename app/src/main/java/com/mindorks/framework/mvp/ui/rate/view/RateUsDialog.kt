@@ -34,7 +34,7 @@ class RateUsDialog : BaseDialogView(), RateUsDialogView{
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.dialog_rate_us, container, false)
+        return inflater.inflate(R.layout.dialog_rate_us, container, false)
 
     }
 
@@ -43,6 +43,11 @@ class RateUsDialog : BaseDialogView(), RateUsDialogView{
         presenter.onAttach(this)
         btnLater.setOnClickListener { presenter.onLaterOptionClicked() }
         btnSubmit.setOnClickListener { presenter.onSubmitOptionClicked() }
+    }
+
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
     }
 
     override fun dismissDialog() {

@@ -42,17 +42,17 @@ class FeedActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun setUpFeedPagerAdapter() {
         feedPagerAdapter.count = 2
-        feed_view_pager.adapter = feedPagerAdapter
-        tab_layout.addTab(tab_layout.newTab().setText(R.string.blogs))
-        tab_layout.addTab(tab_layout.newTab().setText(R.string.open_source))
+        feedViewPager.adapter = feedPagerAdapter
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.blogs))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.open_source))
 
-        feed_view_pager.offscreenPageLimit = tab_layout.tabCount;
+        feedViewPager.offscreenPageLimit = tabLayout.tabCount;
 
-        feed_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout));
+        feedViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                feed_view_pager.currentItem = tab.position
+                feedViewPager.currentItem = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {

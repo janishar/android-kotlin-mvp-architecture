@@ -32,5 +32,4 @@ class AboutFragment : BaseFragment() {
         navBackBtn.setOnClickListener { getBaseActivity()?.onFragmentDetached(TAG) }
     }
 
-
 }

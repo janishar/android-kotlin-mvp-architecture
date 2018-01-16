@@ -16,6 +16,7 @@ import com.mindorks.framework.mvp.data.preferences.AppPreferenceHelper
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.di.PreferenceInfo
 import com.mindorks.framework.mvp.util.AppConstants
+import com.mindorks.framework.mvp.util.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -88,6 +89,11 @@ class AppModule {
     @Provides
     internal fun provideCompositeDisposable(): CompositeDisposable {
         return CompositeDisposable()
+    }
+
+    @Provides
+    internal fun provideSchedulerProvider(): SchedulerProvider {
+        return SchedulerProvider()
     }
 
 

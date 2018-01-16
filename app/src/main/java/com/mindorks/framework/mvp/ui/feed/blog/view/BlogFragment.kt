@@ -62,4 +62,10 @@ class BlogFragment : BaseFragment(), BlogView {
         }
     }
 
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
+    }
+
+
 }

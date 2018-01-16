@@ -28,6 +28,11 @@ class LoginActivity : BaseActivity(), LoginView {
 
     }
 
+    override fun onDestroy() {
+        presenter.onDetach()
+        super.onDestroy()
+    }
+
     override fun onFragmentDetached(tag: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
