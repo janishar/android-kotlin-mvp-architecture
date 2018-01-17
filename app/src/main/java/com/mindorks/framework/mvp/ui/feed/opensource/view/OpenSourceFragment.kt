@@ -19,6 +19,15 @@ import javax.inject.Inject
  */
 class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
 
+    companion object {
+        private var instance: OpenSourceFragment? = null
+
+        internal fun newInstance(): OpenSourceFragment {
+            instance.let { instance = OpenSourceFragment() }
+            return instance as OpenSourceFragment
+        }
+    }
+
     @Inject
     internal lateinit var openSourceAdapter: OpenSourceAdapter
 
@@ -28,15 +37,6 @@ class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
     @Inject
     internal lateinit var presenter: OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor>
 
-    companion object {
-        private var instance: OpenSourceFragment? = null
-        internal fun newInstance(): OpenSourceFragment {
-            if (instance == null) {
-                instance = OpenSourceFragment()
-            }
-            return instance as OpenSourceFragment
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_open_source, container, false)

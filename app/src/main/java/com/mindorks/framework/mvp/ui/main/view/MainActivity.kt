@@ -66,9 +66,8 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     override fun onFragmentDetached(tag: String) {
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(tag)
-        if (fragment != null) {
-            fragmentManager
-                    .beginTransaction()
+        fragmentManager?.let {
+            it.beginTransaction()
                     .disallowAddToBackStack()
                     .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                     .remove(fragment)
