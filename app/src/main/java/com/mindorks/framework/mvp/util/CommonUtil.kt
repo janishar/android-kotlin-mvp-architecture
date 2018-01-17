@@ -9,20 +9,20 @@ import com.mindorks.framework.mvp.R
 /**
  * Created by jyotidubey on 11/01/18.
  */
-class CommonUtil {
-    companion object {
-        fun showLoadingDialog(context: Context?): ProgressDialog {
-            val progressDialog = ProgressDialog(context)
-            progressDialog.show()
-            if (progressDialog.window != null) {
-                progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            }
-            progressDialog.setContentView(R.layout.progress_dialog)
-            progressDialog.isIndeterminate = true
-            progressDialog.setCancelable(false)
-            progressDialog.setCanceledOnTouchOutside(false)
-            return progressDialog
+object CommonUtil {
 
+    fun showLoadingDialog(context: Context?): ProgressDialog {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.show()
+        if (progressDialog.window != null) {
+            progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
+        progressDialog.setContentView(R.layout.progress_dialog)
+        progressDialog.isIndeterminate = true
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+        return progressDialog
+
     }
+
 }

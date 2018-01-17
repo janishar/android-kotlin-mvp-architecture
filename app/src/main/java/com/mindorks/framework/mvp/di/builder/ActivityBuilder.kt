@@ -10,7 +10,7 @@ import com.mindorks.framework.mvp.ui.main.MainActivityModule
 import com.mindorks.framework.mvp.ui.main.view.MainActivity
 import com.mindorks.framework.mvp.ui.rate.RateUsDialogFragmentProvider
 import com.mindorks.framework.mvp.ui.splash.SplashActivityModule
-import com.mindorks.framework.mvp.ui.splash.view.SplashActivity
+import com.mindorks.framework.mvp.ui.splash.view.SplashMVPActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -21,7 +21,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [(SplashActivityModule::class)])
-    abstract fun bindSplashActivity(): SplashActivity
+    abstract fun bindSplashActivity(): SplashMVPActivity
 
     @ContributesAndroidInjector(modules = [(MainActivityModule::class), (RateUsDialogFragmentProvider::class), (AboutFragmentProvider::class)])
     abstract fun bindMainActivity(): MainActivity

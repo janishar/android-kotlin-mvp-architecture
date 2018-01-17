@@ -14,12 +14,12 @@ import kotlinx.android.synthetic.main.fragment_about.*
 class AboutFragment : BaseFragment() {
 
     companion object {
+
         internal val TAG = "AboutFragment"
         private var instance: AboutFragment? = null
+
         internal fun newInstance(): AboutFragment {
-            if (instance == null) {
-                instance = AboutFragment()
-            }
+            instance?.let { instance = AboutFragment() }
             return instance as AboutFragment
         }
     }
@@ -31,5 +31,4 @@ class AboutFragment : BaseFragment() {
     override fun setUp() {
         navBackBtn.setOnClickListener { getBaseActivity()?.onFragmentDetached(TAG) }
     }
-
 }

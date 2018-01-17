@@ -10,11 +10,9 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 14/01/18.
  */
-class OpenSourceInteratorImpl @Inject internal constructor(preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper, apiHelper), OpenSourceInteractor {
+class OpenSourceInterator @Inject internal constructor(preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper, apiHelper), OpenSourceMVPInteractor {
 
     override fun getOpenSourceList(): Observable<OpenSourceResponse> {
         return apiHelper.getOpenSourceApiCall()
     }
-
-
 }

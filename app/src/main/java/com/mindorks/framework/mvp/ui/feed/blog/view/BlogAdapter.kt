@@ -28,7 +28,6 @@ class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogA
         holder.onBind(position)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BlogViewHolder {
         return BlogViewHolder(LayoutInflater.from(parent?.context)
                 .inflate(R.layout.item_blog_list, parent, false))

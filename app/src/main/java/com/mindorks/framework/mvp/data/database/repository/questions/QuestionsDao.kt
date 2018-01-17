@@ -16,5 +16,4 @@ interface QuestionsDao {
 
     @Query("SELECT * FROM questions")
     fun loadAll(): List<Question>
-
 }

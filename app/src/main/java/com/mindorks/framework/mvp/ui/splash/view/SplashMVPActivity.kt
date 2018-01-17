@@ -7,14 +7,15 @@ import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.ui.base.view.BaseActivity
 import com.mindorks.framework.mvp.ui.login.view.LoginActivity
 import com.mindorks.framework.mvp.ui.main.view.MainActivity
-import com.mindorks.framework.mvp.ui.splash.interactor.SplashInteractor
-import com.mindorks.framework.mvp.ui.splash.presenter.SplashPresenter
+import com.mindorks.framework.mvp.ui.splash.interactor.SplashMVPInteractor
+import com.mindorks.framework.mvp.ui.splash.presenter.SplashMVPPresenter
 import javax.inject.Inject
 
-class SplashActivity : BaseActivity(), SplashView {
+class SplashMVPActivity : BaseActivity(), SplashMVPView {
 
     @Inject
-    lateinit var presenter: SplashPresenter<SplashView, SplashInteractor>
+    lateinit var presenter: SplashMVPPresenter<SplashMVPView, SplashMVPInteractor>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +29,15 @@ class SplashActivity : BaseActivity(), SplashView {
     }
 
     override fun onFragmentDetached(tag: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onFragmentAttached() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showSuccessToast() {
-        Toast.makeText(this, "Testing:: Questions Added Successfully", Toast.LENGTH_LONG).show()
     }
 
     override fun showErrorToast() {
-        Toast.makeText(this, "Testing:: Questions Adding Failed", Toast.LENGTH_LONG).show()
     }
 
     override fun openMainActivity() {
@@ -54,5 +51,4 @@ class SplashActivity : BaseActivity(), SplashView {
         startActivity(intent)
         finish()
     }
-
 }

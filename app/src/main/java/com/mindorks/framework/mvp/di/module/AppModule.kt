@@ -6,9 +6,9 @@ import android.content.Context
 import com.mindorks.framework.mvp.BuildConfig
 import com.mindorks.framework.mvp.data.database.AppDatabase
 import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepo
-import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepoImpl
+import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepository
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepo
-import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepoImpl
+import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepository
 import com.mindorks.framework.mvp.data.network.ApiHeader
 import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.network.AppApiHelper
@@ -37,10 +37,7 @@ class AppModule {
     @Provides
     @Singleton
     internal fun provideAppDatabase(context: Context): AppDatabase {
-        /**
-         * TODO : Remove allowMainThreadQueries(), as it may potentially lock the UI for a long period of time
-         */
-        return Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME).allowMainThreadQueries()
+        return Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME)
                 .build()
     }
 
@@ -64,7 +61,9 @@ class AppModule {
     @Provides
     @Singleton
     internal fun provideProtectedApiHeader(apiKey: String, preferenceHelper: PreferenceHelper): ApiHeader.ProtectedApiHeader {
-        return ApiHeader.ProtectedApiHeader(apiKey = apiKey, userId = preferenceHelper.getCurrentUserId(), accessToken = preferenceHelper.getAccessToken())
+        return ApiHeader.ProtectedApiHeader(apiKey = apiKey,
+                userId = preferenceHelper.getCurrentUserId(),
+                accessToken = preferenceHelper.getAccessToken())
     }
 
     @Provides
@@ -77,13 +76,13 @@ class AppModule {
     @Provides
     @Singleton
     internal fun provideQuestionRepoHelper(appDatabase: AppDatabase): QuestionRepo {
-        return QuestionRepoImpl(appDatabase.questionsDao())
+        return QuestionRepository(appDatabase.questionsDao())
     }
 
     @Provides
     @Singleton
     internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepo {
-        return OptionsRepoImpl(appDatabase.optionsDao())
+        return OptionsRepository(appDatabase.optionsDao())
     }
 
     @Provides

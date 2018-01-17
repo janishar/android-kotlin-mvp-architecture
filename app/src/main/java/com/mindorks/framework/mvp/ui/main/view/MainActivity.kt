@@ -14,9 +14,9 @@ import com.mindorks.framework.mvp.ui.about.view.AboutFragment
 import com.mindorks.framework.mvp.ui.base.view.BaseActivity
 import com.mindorks.framework.mvp.ui.feed.view.FeedActivity
 import com.mindorks.framework.mvp.ui.login.view.LoginActivity
-import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
+import com.mindorks.framework.mvp.ui.main.interactor.MainMVPInteractor
 import com.mindorks.framework.mvp.ui.main.interactor.QuestionCardData
-import com.mindorks.framework.mvp.ui.main.presenter.MainPresenter
+import com.mindorks.framework.mvp.ui.main.presenter.MainMVPPresenter
 import com.mindorks.framework.mvp.ui.rate.view.RateUsDialog
 import com.mindorks.framework.mvp.util.ScreenUtils
 import com.mindorks.placeholderview.SwipeDecor
@@ -28,12 +28,14 @@ import kotlinx.android.synthetic.main.app_bar_navigation.*
 import kotlinx.android.synthetic.main.nav_header_navigation.view.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
-    @Inject
-    internal lateinit var presenter: MainPresenter<MainView, MainInteractor>
+class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationItemSelectedListener,
+        HasSupportFragmentInjector {
 
     @Inject
+    internal lateinit var presenter: MainMVPPresenter<MainMVPView, MainMVPInteractor>
+    @Inject
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +43,25 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         setUpDrawerMenu()
         setupCardContainerView()
         presenter.onAttach(this)
+    }
 
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+        val fragmentManager = supportFragmentManager
+        val fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG)
+        if (fragment == null) {
+            super.onBackPressed()
+        } else {
+            onFragmentDetached(AboutFragment.TAG)
+        }
     }
 
     override fun onDestroy() {
         presenter.onDetach()
         super.onDestroy()
     }
-
 
     override fun onFragmentDetached(tag: String) {
         val fragmentManager = supportFragmentManager
@@ -65,21 +78,6 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     }
 
     override fun onFragmentAttached() {
-    }
-
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        }
-
-        val fragmentManager = supportFragmentManager
-        val fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG)
-        if (fragment == null) {
-            super.onBackPressed()
-        } else {
-            onFragmentDetached(AboutFragment.TAG)
-        }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -118,7 +116,6 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     override fun inflateUserDetails(userDetails: Pair<String?, String?>) {
         navView.getHeaderView(0).nav_name.text = userDetails.first
         navView.getHeaderView(0).nav_email.text = userDetails.second
-
     }
 
     override fun openLoginActivity() {
@@ -129,7 +126,8 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
     override fun openAboutFragment() {
         lockDrawer()
-        supportFragmentManager.beginTransaction().disallowAddToBackStack().setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+        supportFragmentManager.beginTransaction().disallowAddToBackStack()
+                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.cl_root_view, AboutFragment.newInstance(), AboutFragment.TAG)
                 .commit()
     }
@@ -139,12 +137,11 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         startActivity(intent)
     }
 
-    override fun openRateUsDailog() {
+    override fun openRateUsDialog() {
         RateUsDialog.newInstance()?.let {
             it.show(supportFragmentManager)
         }
     }
-
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentDispatchingAndroidInjector
@@ -153,18 +150,17 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     private fun setUpDrawerMenu() {
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         navView.setNavigationItemSelectedListener(this)
-
     }
 
     private fun setupCardContainerView() {
         val screenWidth = ScreenUtils.getScreenWidth(this)
         val screenHeight = ScreenUtils.getScreenHeight(this)
-        questionHolder.getBuilder()
+        questionHolder.builder
                 .setDisplayViewCount(3)
                 .setHeightSwipeDistFactor(10f)
                 .setWidthSwipeDistFactor(5f)
@@ -174,7 +170,6 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
                         .setPaddingTop(20)
                         .setSwipeRotationAngle(10)
                         .setRelativeScale(0.01f))
-
         questionHolder.addItemRemoveListener { count ->
             if (count == 0) {
                 Handler(mainLooper).postDelayed({ presenter.refreshQuestionCards() }, 800)

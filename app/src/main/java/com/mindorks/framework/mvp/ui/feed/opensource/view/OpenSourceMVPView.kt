@@ -6,7 +6,7 @@ import com.mindorks.framework.mvp.ui.base.view.MVPView
 /**
  * Created by jyotidubey on 14/01/18.
  */
-interface OpenSourceView : MVPView {
+interface OpenSourceMVPView : MVPView {
     fun displayOpenSourceList(blogs: List<OpenSource>?)
 
 }

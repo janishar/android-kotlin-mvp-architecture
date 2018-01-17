@@ -7,6 +7,7 @@ import io.reactivex.Observable
 /**
  * Created by jyotidubey on 14/01/18.
  */
-interface OpenSourceInteractor : MVPInteractor {
+interface OpenSourceMVPInteractor : MVPInteractor {
+
     fun getOpenSourceList(): Observable<OpenSourceResponse>
 }

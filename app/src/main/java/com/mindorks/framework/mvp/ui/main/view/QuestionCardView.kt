@@ -30,11 +30,24 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
     @View(R.id.iv_pic)
     private lateinit var mPicImageView: ANImageView
 
+    @Click(R.id.btn_option_1)
+    internal fun onOption1Click() {
+        showCorrectOptions()
+    }
+
+    @Click(R.id.btn_option_2)
+    internal fun onOption2Click() {
+        showCorrectOptions()
+    }
+
+    @Click(R.id.btn_option_3)
+    internal fun onOption3Click() {
+        showCorrectOptions()
+    }
+
     @Resolve
     private fun onResolved() {
-
         mQuestionTextView.text = mQuestion.question.questionText
-
         for (i in 0..2) {
             var button: Button? = null
             when (i) {
@@ -42,14 +55,10 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
                 1 -> button = mOption2Button
                 2 -> button = mOption3Button
             }
-
             button?.text = mQuestion.option[i].optionText
-
-            if(mQuestion.question.imgUrl != null) {
+            if (mQuestion.question.imgUrl != null) {
                 mPicImageView.setImageUrl(mQuestion.question.imgUrl)
-
             }
-
         }
     }
 
@@ -70,21 +79,6 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
                 }
             }
         }
-    }
-
-    @Click(R.id.btn_option_1)
-    fun onOption1Click() {
-        showCorrectOptions()
-    }
-
-    @Click(R.id.btn_option_2)
-    fun onOption2Click() {
-        showCorrectOptions()
-    }
-
-    @Click(R.id.btn_option_3)
-    fun onOption3Click() {
-        showCorrectOptions()
     }
 
 }

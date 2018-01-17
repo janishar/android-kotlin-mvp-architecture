@@ -19,18 +19,17 @@ abstract class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.CallBac
         performDI()
     }
 
-    private fun performDI() {
-        AndroidInjection.inject(this)
-    }
-
     override fun hideProgress() {
         progressDialog?.let { if(it.isShowing) it.cancel() }
-
     }
 
     override fun showProgress() {
         hideProgress()
         progressDialog = CommonUtil.showLoadingDialog(this)
+    }
+
+    private fun performDI() {
+        AndroidInjection.inject(this)
     }
 
 }

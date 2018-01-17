@@ -11,5 +11,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class RateUsDialogFragmentProvider{
 
     @ContributesAndroidInjector(modules = [RateUsFragmentModule::class])
-    internal abstract fun provideRateUdFragment() : RateUsDialog
+    internal abstract fun provideRateUsFragment() : RateUsDialog
 }

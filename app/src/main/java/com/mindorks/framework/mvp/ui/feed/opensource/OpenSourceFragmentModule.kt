@@ -1,13 +1,13 @@
 package com.mindorks.framework.mvp.ui.feed.opensource
 
 import android.support.v7.widget.LinearLayoutManager
-import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceInteractor
-import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceInteratorImpl
+import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceMVPInteractor
+import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceInterator
+import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourceMVPPresenter
 import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourcePresenter
-import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourcePresenterImpl
 import com.mindorks.framework.mvp.ui.feed.opensource.view.OpenSourceAdapter
 import com.mindorks.framework.mvp.ui.feed.opensource.view.OpenSourceFragment
-import com.mindorks.framework.mvp.ui.feed.opensource.view.OpenSourceView
+import com.mindorks.framework.mvp.ui.feed.opensource.view.OpenSourceMVPView
 import dagger.Module
 import dagger.Provides
 
@@ -18,12 +18,12 @@ import dagger.Provides
 class OpenSourceFragmentModule {
 
     @Provides
-    internal fun provideOpenSourceInteractor(interactor: OpenSourceInteratorImpl): OpenSourceInteractor {
+    internal fun provideOpenSourceInteractor(interactor: OpenSourceInterator): OpenSourceMVPInteractor {
         return interactor
     }
 
     @Provides
-    internal fun provideOpenSourcePresenter(presenter: OpenSourcePresenterImpl<OpenSourceView, OpenSourceInteractor>): OpenSourcePresenter<OpenSourceView, OpenSourceInteractor> {
+    internal fun provideOpenSourcePresenter(presenter: OpenSourcePresenter<OpenSourceMVPView, OpenSourceMVPInteractor>): OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor> {
         return presenter
     }
 

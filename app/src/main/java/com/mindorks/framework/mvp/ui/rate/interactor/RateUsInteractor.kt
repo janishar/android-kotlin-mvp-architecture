@@ -8,9 +8,7 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 15/01/18.
  */
-class RateUsInteractorImpl @Inject internal constructor(apiHelper: ApiHelper, preferenceHelper: PreferenceHelper) : BaseInteractor(apiHelper = apiHelper, preferenceHelper = preferenceHelper), RateUsInterator {
-    override fun submitRating() {
+class RateUsInteractor @Inject internal constructor(apiHelper: ApiHelper, preferenceHelper: PreferenceHelper) : BaseInteractor(apiHelper = apiHelper, preferenceHelper = preferenceHelper), RateUsMVPInterator {
 
-    }
-
+    override fun submitRating() {}
 }

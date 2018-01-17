@@ -13,6 +13,7 @@ abstract class BasePresenter<V : MVPView, I : MVPInteractor> internal constructo
     private var view: V? = null
     private val isViewAttached: Boolean get() = view != null
 
+
     override fun onAttach(view: V?) {
         this.view = view
     }
@@ -26,5 +27,4 @@ abstract class BasePresenter<V : MVPView, I : MVPInteractor> internal constructo
         view = null
         interactor = null
     }
-
 }

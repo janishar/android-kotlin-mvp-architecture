@@ -6,6 +6,8 @@ import com.mindorks.framework.mvp.ui.base.view.MVPView
 /**
  * Created by jyotidubey on 13/01/18.
  */
-interface BlogView : MVPView {
+interface BlogMVPView : MVPView {
+
     fun displayBlogList(blogs: List<Blog>?)
+
 }

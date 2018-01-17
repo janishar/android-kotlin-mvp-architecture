@@ -6,11 +6,10 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 06/01/18.
  */
-class QuestionRepoImpl @Inject internal constructor(private val questionsDao: QuestionsDao) : QuestionRepo {
+class QuestionRepository @Inject internal constructor(private val questionsDao: QuestionsDao) : QuestionRepo {
 
     override fun isQuestionsRepoEmpty(): Observable<Boolean> {
         return Observable.fromCallable({ questionsDao.loadAll().isEmpty() })
-
     }
 
     override fun insertQuestions(questions: List<Question>): Observable<Boolean> {

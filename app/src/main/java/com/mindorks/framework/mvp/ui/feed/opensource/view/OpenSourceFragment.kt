@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.OpenSource
 import com.mindorks.framework.mvp.ui.base.view.BaseFragment
-import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceInteractor
-import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourcePresenter
+import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceMVPInteractor
+import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourceMVPPresenter
 import kotlinx.android.synthetic.main.fragment_open_source.*
 import javax.inject.Inject
 
 /**
  * Created by jyotidubey on 13/01/18.
  */
-class OpenSourceFragment : BaseFragment(), OpenSourceView {
+class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
 
     @Inject
     internal lateinit var openSourceAdapter: OpenSourceAdapter
@@ -26,7 +26,7 @@ class OpenSourceFragment : BaseFragment(), OpenSourceView {
     internal lateinit var layoutManager: LinearLayoutManager
 
     @Inject
-    internal lateinit var presenter: OpenSourcePresenter<OpenSourceView, OpenSourceInteractor>
+    internal lateinit var presenter: OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor>
 
     companion object {
         private var instance: OpenSourceFragment? = null

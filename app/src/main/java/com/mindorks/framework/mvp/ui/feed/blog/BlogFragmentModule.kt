@@ -1,13 +1,13 @@
 package com.mindorks.framework.mvp.ui.feed.blog
 
 import android.support.v7.widget.LinearLayoutManager
+import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogInteractor
-import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogInteractorImpl
+import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogMVPPresenter
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogPresenter
-import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogPresenterImpl
 import com.mindorks.framework.mvp.ui.feed.blog.view.BlogAdapter
 import com.mindorks.framework.mvp.ui.feed.blog.view.BlogFragment
-import com.mindorks.framework.mvp.ui.feed.blog.view.BlogView
+import com.mindorks.framework.mvp.ui.feed.blog.view.BlogMVPView
 import dagger.Module
 import dagger.Provides
 import java.util.*
@@ -19,12 +19,12 @@ import java.util.*
 class BlogFragmentModule {
 
     @Provides
-    internal fun provideBlogInteractor(interactor: BlogInteractorImpl): BlogInteractor {
+    internal fun provideBlogInteractor(interactor: BlogInteractor): BlogMVPInteractor {
         return interactor
     }
 
     @Provides
-    internal fun provideBlogPresenter(presenter: BlogPresenterImpl<BlogView, BlogInteractor>): BlogPresenter<BlogView, BlogInteractor> {
+    internal fun provideBlogPresenter(presenter: BlogPresenter<BlogMVPView, BlogMVPInteractor>): BlogMVPPresenter<BlogMVPView, BlogMVPInteractor> {
         return presenter
     }
 

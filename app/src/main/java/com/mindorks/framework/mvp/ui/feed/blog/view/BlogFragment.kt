@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.Blog
 import com.mindorks.framework.mvp.ui.base.view.BaseFragment
-import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogInteractor
-import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogPresenter
+import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogMVPInteractor
+import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogMVPPresenter
 import kotlinx.android.synthetic.main.fragment_blog.*
 import javax.inject.Inject
 
@@ -18,26 +18,23 @@ import javax.inject.Inject
 /**
  * Created by jyotidubey on 13/01/18.
  */
-class BlogFragment : BaseFragment(), BlogView {
-
-    @Inject
-    internal lateinit var blogAdapter: BlogAdapter
-
-    @Inject
-    internal lateinit var layoutManager: LinearLayoutManager
-
-    @Inject
-    internal lateinit var presenter: BlogPresenter<BlogView, BlogInteractor>
+class BlogFragment : BaseFragment(), BlogMVPView {
 
     companion object {
         private var instance: BlogFragment? = null
+
         internal fun newInstance(): BlogFragment {
-            if (instance == null) {
-                instance = BlogFragment()
-            }
+            instance?.let { instance = BlogFragment() }
             return instance as BlogFragment
         }
     }
+
+    @Inject
+    internal lateinit var blogAdapter: BlogAdapter
+    @Inject
+    internal lateinit var layoutManager: LinearLayoutManager
+    @Inject
+    internal lateinit var presenter: BlogMVPPresenter<BlogMVPView, BlogMVPInteractor>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_blog, container, false)
@@ -66,6 +63,4 @@ class BlogFragment : BaseFragment(), BlogView {
         presenter.onDetach()
         super.onDestroyView()
     }
-
-
 }

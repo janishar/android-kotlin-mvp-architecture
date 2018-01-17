@@ -5,10 +5,10 @@ import com.mindorks.framework.mvp.ui.base.view.MVPView
 /**
  * Created by jyotidubey on 04/01/18.
  */
-interface SplashView : MVPView {
+interface SplashMVPView : MVPView {
+
     fun showSuccessToast()
     fun showErrorToast()
     fun openMainActivity()
     fun openLoginActivity()
-
 }

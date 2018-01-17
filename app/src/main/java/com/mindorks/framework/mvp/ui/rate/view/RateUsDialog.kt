@@ -8,34 +8,32 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.ui.base.view.BaseDialogView
-import com.mindorks.framework.mvp.ui.rate.interactor.RateUsInterator
-import com.mindorks.framework.mvp.ui.rate.presenter.RateUsPresenter
+import com.mindorks.framework.mvp.ui.rate.interactor.RateUsMVPInterator
+import com.mindorks.framework.mvp.ui.rate.presenter.RateUsMVPPresenter
 import kotlinx.android.synthetic.main.dialog_rate_us.*
 import javax.inject.Inject
 
 /**
  * Created by jyotidubey on 14/01/18.
  */
-class RateUsDialog : BaseDialogView(), RateUsDialogView{
-
-    private val TAG = "RateUsDialog"
-
-    @Inject
-    internal lateinit var presenter: RateUsPresenter<RateUsDialogView, RateUsInterator>
+class RateUsDialog : BaseDialogView(), RateUsDialogMVPView {
 
     companion object {
         private var instance: RateUsDialog? = null
-        fun newInstance(): RateUsDialog? {
-            if (instance == null) {
-                instance = RateUsDialog()
-            }
+
+        internal fun newInstance(): RateUsDialog? {
+            instance?.let { instance = RateUsDialog() }
             return instance as RateUsDialog
         }
     }
 
+    @Inject
+    internal lateinit var presenter: RateUsMVPPresenter<RateUsDialogMVPView, RateUsMVPInterator>
+
+    private val TAG = "RateUsDialog"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_rate_us, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,14 +50,13 @@ class RateUsDialog : BaseDialogView(), RateUsDialogView{
 
     override fun dismissDialog() {
         super.dismissDialog(TAG)
-
     }
 
     override fun showRatingSubmissionSuccessMessage() {
-        Toast.makeText(context,getString(R.string.rating_submitted_successfully),Toast.LENGTH_LONG).show()
+        Toast.makeText(context, getString(R.string.rating_submitted_successfully), Toast.LENGTH_LONG).show()
     }
 
-    fun show(fragmentManager: FragmentManager) {
+    internal fun show(fragmentManager: FragmentManager) {
         super.show(fragmentManager, TAG)
     }
 }

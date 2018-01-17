@@ -20,7 +20,6 @@ class LoginRequest {
                                                          @SerializedName("fb_access_token")
                                                          internal val fbAccessToken: String)
 
-
     data class GoogleLoginRequest internal constructor(@Expose
                                                        @SerializedName("google_user_id")
                                                        internal val googleUserId: String,

@@ -50,6 +50,4 @@ class SchedulerProvider {
     private fun getMainThreadScheduler(): Scheduler {
         return AndroidSchedulers.mainThread()
     }
-
-
 }

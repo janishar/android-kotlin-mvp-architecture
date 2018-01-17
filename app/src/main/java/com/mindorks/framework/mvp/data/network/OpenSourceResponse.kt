@@ -18,18 +18,3 @@ data class OpenSourceResponse(@Expose
                              @SerializedName("data")
                              var data: List<OpenSource>? = null)
 
-data class OpenSource(@Expose
-                      @SerializedName("project_url")
-                      var projectUrl: String? = null,
-
-                      @Expose
-                      @SerializedName("img_url")
-                      var coverImgUrl: String? = null,
-
-                      @Expose
-                      @SerializedName("title")
-                      var title: String? = null,
-
-                      @Expose
-                      @SerializedName("description")
-                      var description: String? = null)

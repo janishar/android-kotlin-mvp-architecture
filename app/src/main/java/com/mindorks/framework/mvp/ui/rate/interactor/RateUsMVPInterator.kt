@@ -5,7 +5,7 @@ import com.mindorks.framework.mvp.ui.base.interactor.MVPInteractor
 /**
  * Created by jyotidubey on 15/01/18.
  */
-interface RateUsInterator : MVPInteractor{
+interface RateUsMVPInterator : MVPInteractor{
 
     fun submitRating()
 }
