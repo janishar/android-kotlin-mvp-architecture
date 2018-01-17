@@ -24,7 +24,7 @@ class BlogFragment : BaseFragment(), BlogMVPView {
         private var instance: BlogFragment? = null
 
         internal fun newInstance(): BlogFragment {
-            instance.let { instance = BlogFragment() }
+            instance ?: run { instance = BlogFragment() }
             return instance as BlogFragment
         }
     }

@@ -46,16 +46,12 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG)
-        if (fragment == null) {
-            super.onBackPressed()
-        } else {
-            onFragmentDetached(AboutFragment.TAG)
-        }
+        fragment?.let { onFragmentDetached(AboutFragment.TAG) } ?: let { super.onBackPressed() }
     }
 
     override fun onDestroy() {
@@ -94,16 +90,16 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
                 presenter.onDrawerOptionLogoutClick()
             }
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun lockDrawer() {
-        drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     override fun unlockDrawer() {
-        drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
     override fun displayQuestionCard(questionCards: List<QuestionCardData>) {
@@ -149,9 +145,9 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     private fun setUpDrawerMenu() {
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar,
+                this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
     }

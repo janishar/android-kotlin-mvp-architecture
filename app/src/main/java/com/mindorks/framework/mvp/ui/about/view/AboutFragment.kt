@@ -19,7 +19,7 @@ class AboutFragment : BaseFragment() {
         private var instance: AboutFragment? = null
 
         internal fun newInstance(): AboutFragment {
-            instance.let { instance = AboutFragment() }
+            instance ?: run { instance = AboutFragment() }
             return instance as AboutFragment
         }
     }

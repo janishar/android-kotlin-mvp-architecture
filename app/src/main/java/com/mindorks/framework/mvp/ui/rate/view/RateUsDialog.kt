@@ -22,7 +22,7 @@ class RateUsDialog : BaseDialogView(), RateUsDialogMVPView {
         private var instance: RateUsDialog? = null
 
         internal fun newInstance(): RateUsDialog? {
-            instance.let { instance = RateUsDialog() }
+            instance ?: run { instance = RateUsDialog() }
             return instance as RateUsDialog
         }
     }

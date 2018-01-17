@@ -23,7 +23,7 @@ class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
         private var instance: OpenSourceFragment? = null
 
         internal fun newInstance(): OpenSourceFragment {
-            instance.let { instance = OpenSourceFragment() }
+            instance ?: run { instance = OpenSourceFragment() }
             return instance as OpenSourceFragment
         }
     }
