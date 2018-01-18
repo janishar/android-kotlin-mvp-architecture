@@ -12,5 +12,4 @@ interface QuestionRepo {
     fun insertQuestions(questions: List<Question>): Observable<Boolean>
 
     fun loadQuestions(): Observable<List<Question>>
-
 }

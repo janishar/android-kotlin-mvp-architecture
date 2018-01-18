@@ -10,7 +10,7 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".ui.splash.view.SplashActivity">
+    <activity android:name=".ui.splash.view.SplashMVPActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -23,10 +23,7 @@
     </activity>
     <activity android:name=".ui.login.view.LoginActivity">
     </activity>
-    <activity
-      android:label="@string/title_activity_navigation_drawer"
-      android:name=".ui.main.view.NavigationActivity"
-      android:theme="@style/AppTheme">
+    <activity android:name=".ui.feed.view.FeedActivity">
     </activity>
   </application>
 

@@ -1,14 +1,27 @@
 package com.mindorks.framework.mvp.util
 
-import android.util.Patterns
+import android.app.ProgressDialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import com.mindorks.framework.mvp.R
 
 /**
  * Created by jyotidubey on 11/01/18.
  */
-class CommonUtil {
-    companion object {
-        fun isValidEmail(email: String): Boolean {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+object CommonUtil {
+
+    fun showLoadingDialog(context: Context?): ProgressDialog {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.let {
+            it.show()
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.setContentView(R.layout.progress_dialog)
+            it.isIndeterminate = true
+            it.setCancelable(false)
+            it.setCanceledOnTouchOutside(false)
+            return it
         }
     }
+
 }

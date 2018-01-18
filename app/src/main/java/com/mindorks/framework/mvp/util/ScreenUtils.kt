@@ -12,26 +12,20 @@ object ScreenUtils {
     fun getScreenWidth(context: Context): Int {
         val windowManager = context
                 .getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val dm = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(dm)
-        return dm.widthPixels
+        windowManager.let {
+            val dm = DisplayMetrics()
+            it.defaultDisplay.getMetrics(dm)
+            return dm.widthPixels
+        }
     }
 
     fun getScreenHeight(context: Context): Int {
         val windowManager = context
                 .getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val dm = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(dm)
-        return dm.heightPixels
-    }
-
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resourceId = context.resources
-                .getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = context.resources.getDimensionPixelSize(resourceId)
+        windowManager.let {
+            val dm = DisplayMetrics()
+            it.defaultDisplay.getMetrics(dm)
+            return dm.heightPixels
         }
-        return result
     }
-}// This utility class is not publicly instantiable
+}

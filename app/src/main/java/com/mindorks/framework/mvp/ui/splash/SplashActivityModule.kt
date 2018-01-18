@@ -1,13 +1,12 @@
 package com.mindorks.framework.mvp.ui.splash
 
 import com.mindorks.framework.mvp.ui.splash.interactor.SplashInteractor
-import com.mindorks.framework.mvp.ui.splash.interactor.SplashInteractorImpl
+import com.mindorks.framework.mvp.ui.splash.interactor.SplashMVPInteractor
+import com.mindorks.framework.mvp.ui.splash.presenter.SplashMVPPresenter
 import com.mindorks.framework.mvp.ui.splash.presenter.SplashPresenter
-import com.mindorks.framework.mvp.ui.splash.presenter.SplashPresenterImpl
-import com.mindorks.framework.mvp.ui.splash.view.SplashView
+import com.mindorks.framework.mvp.ui.splash.view.SplashMVPView
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by jyotidubey on 06/01/18.
@@ -16,13 +15,9 @@ import io.reactivex.disposables.CompositeDisposable
 class SplashActivityModule {
 
     @Provides
-    internal fun provideMainInteractor(mainInteractorImpl: SplashInteractorImpl): SplashInteractor {
-        return mainInteractorImpl
-    }
+    internal fun provideSplashInteractor(splashInteractor: SplashInteractor): SplashMVPInteractor = splashInteractor
 
     @Provides
-    internal fun provideMainPresenter(mainPresenterImpl: SplashPresenterImpl<SplashView, SplashInteractor>): SplashPresenter<SplashView, SplashInteractor> {
-        return mainPresenterImpl
-    }
-
+    internal fun provideSplashPresenter(splashPresenter: SplashPresenter<SplashMVPView, SplashMVPInteractor>)
+            : SplashMVPPresenter<SplashMVPView, SplashMVPInteractor> = splashPresenter
 }

@@ -1,10 +1,10 @@
 package com.mindorks.framework.mvp.ui.login
 
 import com.mindorks.framework.mvp.ui.login.interactor.LoginInteractor
-import com.mindorks.framework.mvp.ui.login.interactor.LoginInteractorImpl
+import com.mindorks.framework.mvp.ui.login.interactor.LoginMVPInteractor
+import com.mindorks.framework.mvp.ui.login.presenter.LoginMVPPresenter
 import com.mindorks.framework.mvp.ui.login.presenter.LoginPresenter
-import com.mindorks.framework.mvp.ui.login.presenter.LoginPresenterImpl
-import com.mindorks.framework.mvp.ui.login.view.LoginView
+import com.mindorks.framework.mvp.ui.login.view.LoginMVPView
 import dagger.Module
 import dagger.Provides
 
@@ -15,12 +15,10 @@ import dagger.Provides
 class LoginActivityModule {
 
     @Provides
-    internal fun provideLoginInteractor(interactor: LoginInteractorImpl): LoginInteractor {
-        return interactor
-    }
+    internal fun provideLoginInteractor(interactor: LoginInteractor): LoginMVPInteractor = interactor
 
     @Provides
-    internal fun provideLoginPresenter(presenter: LoginPresenterImpl<LoginView, LoginInteractor>): LoginPresenter<LoginView, LoginInteractor> {
-        return presenter
-    }
+    internal fun provideLoginPresenter(presenter: LoginPresenter<LoginMVPView, LoginMVPInteractor>)
+            : LoginMVPPresenter<LoginMVPView, LoginMVPInteractor> = presenter
+
 }

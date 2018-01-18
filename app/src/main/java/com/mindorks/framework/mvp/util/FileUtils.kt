@@ -7,22 +7,17 @@ import java.nio.charset.Charset
 /**
  * Created by jyotidubey on 07/01/18.
  */
-class FileUtils{
-    companion object {
-        @Throws(IOException::class)
-        fun loadJSONFromAsset(context: Context, jsonFileName: String): String {
+object FileUtils {
 
-            val manager = context.assets
-            val inputStream = manager.open(jsonFileName)
-
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-
-            return String(buffer, Charset.forName("UTF-8"))
+    @Throws(IOException::class)
+    fun loadJSONFromAsset(context: Context, jsonFileName: String): String {
+        (context.assets).open(jsonFileName).let {
+            val buffer = ByteArray(it.available())
+            it.read(buffer)
+            it.close()
+            buffer
+        }.let {
+            return String(it, Charset.forName("UTF-8"))
         }
     }
-
-
 }
