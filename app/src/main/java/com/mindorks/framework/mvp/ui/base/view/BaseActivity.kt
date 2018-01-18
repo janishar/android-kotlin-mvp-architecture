@@ -13,7 +13,6 @@ abstract class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.CallBac
 
     private var progressDialog: ProgressDialog? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDI()
@@ -29,6 +28,5 @@ abstract class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.CallBac
     }
 
     private fun performDI() = AndroidInjection.inject(this)
-
 
 }

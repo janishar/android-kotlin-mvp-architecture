@@ -15,9 +15,7 @@ object CommonUtil {
         val progressDialog = ProgressDialog(context)
         progressDialog.let {
             it.show()
-            it.window?.let {
-                it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            }
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             it.setContentView(R.layout.progress_dialog)
             it.isIndeterminate = true
             it.setCancelable(false)

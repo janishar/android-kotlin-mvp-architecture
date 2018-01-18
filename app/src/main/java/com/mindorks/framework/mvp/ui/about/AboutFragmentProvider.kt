@@ -12,4 +12,5 @@ abstract class AboutFragmentProvider {
 
     @ContributesAndroidInjector
     abstract internal fun provideAboutFragment(): AboutFragment
+
 }

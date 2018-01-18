@@ -34,8 +34,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideAppDatabase(context: Context): AppDatabase
-            = Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME).build()
+    internal fun provideAppDatabase(context: Context): AppDatabase =
+            Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME).build()
 
     @Provides
     internal fun provideApiKey(): String = BuildConfig.API_KEY

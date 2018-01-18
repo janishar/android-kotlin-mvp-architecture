@@ -17,7 +17,6 @@ abstract class BaseDialogView : DialogFragment(), DialogMVPView {
     private var parentActivity: BaseActivity? = null
     private var progressDialog: ProgressDialog? = null
 
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is BaseActivity) {
@@ -54,18 +53,16 @@ abstract class BaseDialogView : DialogFragment(), DialogMVPView {
         progressDialog = CommonUtil.showLoadingDialog(this.context)
     }
 
-
     private fun performDependencyInjection() {
         AndroidSupportInjection.inject(this)
     }
-
 
     fun dismissDialog(tag: String) {
         dismiss()
         getBaseActivity()?.onFragmentDetached(tag)
     }
 
-    fun getBaseActivity(): BaseActivity? {
+    private fun getBaseActivity(): BaseActivity? {
         return parentActivity
     }
 

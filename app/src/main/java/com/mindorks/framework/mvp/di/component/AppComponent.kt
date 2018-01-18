@@ -13,15 +13,18 @@ import javax.inject.Singleton
  * Created by jyotidubey on 05/01/18.
  */
 @Singleton
-@Component(modules = arrayOf(AndroidInjectionModule::class, AppModule::class, ActivityBuilder::class))
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (ActivityBuilder::class)])
 interface AppComponent {
 
     @Component.Builder
     interface Builder {
+
         @BindsInstance
         fun application(application: Application): Builder
+
         fun build(): AppComponent
     }
 
     fun inject(app: MvpApp)
+
 }

@@ -17,7 +17,6 @@ abstract class BaseFragment : Fragment(), MVPView {
     private var parentActivity: BaseActivity? = null
     private var progressDialog: ProgressDialog? = null
 
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is BaseActivity) {

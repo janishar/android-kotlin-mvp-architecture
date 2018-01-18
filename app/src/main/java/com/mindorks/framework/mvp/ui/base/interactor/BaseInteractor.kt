@@ -26,5 +26,4 @@ open class BaseInteractor() : MVPInteractor {
         it.setCurrentUserLoggedInMode(AppConstants.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT)
     }
 
-
 }

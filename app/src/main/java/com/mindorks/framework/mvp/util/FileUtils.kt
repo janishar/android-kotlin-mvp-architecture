@@ -11,9 +11,7 @@ object FileUtils {
 
     @Throws(IOException::class)
     fun loadJSONFromAsset(context: Context, jsonFileName: String): String {
-        (context.assets).let {
-            it.open(jsonFileName)
-        }.let {
+        (context.assets).open(jsonFileName).let {
             val buffer = ByteArray(it.available())
             it.read(buffer)
             it.close()

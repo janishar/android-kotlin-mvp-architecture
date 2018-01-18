@@ -6,5 +6,7 @@ package com.mindorks.framework.mvp.ui.base.interactor
 interface MVPInteractor {
 
     fun isUserLoggedIn(): Boolean
+
     fun performUserLogout()
+
 }

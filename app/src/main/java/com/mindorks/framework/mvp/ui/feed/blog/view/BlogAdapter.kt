@@ -15,10 +15,7 @@ import kotlinx.android.synthetic.main.item_blog_list.view.*
 /**
  * Created by jyotidubey on 14/01/18.
  */
-class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogAdapter.BlogViewHolder>() {
-
-    private val blogListItems: MutableList<Blog> = blogListItems
-
+class BlogAdapter(private val blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogAdapter.BlogViewHolder>() {
 
     override fun getItemCount() = this.blogListItems.size
 

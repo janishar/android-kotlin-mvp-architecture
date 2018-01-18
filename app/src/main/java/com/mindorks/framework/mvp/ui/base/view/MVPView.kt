@@ -6,5 +6,7 @@ package com.mindorks.framework.mvp.ui.base.view
 interface MVPView {
 
     fun showProgress()
+
     fun hideProgress()
+
 }

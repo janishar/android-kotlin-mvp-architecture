@@ -13,7 +13,6 @@ class FeedPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
 
     private var tabCount = 0
 
-
     override fun getCount(): Int {
         return tabCount
     }
