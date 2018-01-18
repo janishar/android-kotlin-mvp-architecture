@@ -55,11 +55,12 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
             itemView.setOnClickListener {
                 openSource.projectUrl?.let {
                     try {
-                        val intent = Intent()
-                        intent.apply { action = Intent.ACTION_VIEW }
-                                .apply { data = Uri.parse(it) }
-                                .addCategory(Intent.CATEGORY_BROWSABLE)
-                        itemView.context.startActivity(intent)
+                        // using "apply" as an example
+                        itemView.context.startActivity(Intent().apply {
+                            action = Intent.ACTION_VIEW
+                            data = Uri.parse(it)
+                            addCategory(Intent.CATEGORY_BROWSABLE)
+                        })
                     } catch (e: Exception) {
                     }
                 }

@@ -52,9 +52,12 @@ class BlogAdapter(private val blogListItems: MutableList<Blog>) : RecyclerView.A
                 blog.blogUrl?.let {
                     try {
                         val intent = Intent()
-                        intent.apply { action = Intent.ACTION_VIEW }
-                                .apply { data = Uri.parse(it) }
-                                .addCategory(Intent.CATEGORY_BROWSABLE)
+                        // using "with" as an example
+                        with(intent) {
+                            action = Intent.ACTION_VIEW
+                            data = Uri.parse(it)
+                            addCategory(Intent.CATEGORY_BROWSABLE)
+                        }
                         itemView.context.startActivity(intent)
                     } catch (e: Exception) {
                     }
