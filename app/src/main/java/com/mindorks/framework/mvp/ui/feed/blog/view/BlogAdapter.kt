@@ -19,19 +19,16 @@ class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogA
 
     private val blogListItems: MutableList<Blog> = blogListItems
 
-    override fun getItemCount(): Int {
-        return this.blogListItems.size
+
+    override fun getItemCount() = this.blogListItems.size
+
+    override fun onBindViewHolder(holder: BlogViewHolder, position: Int) = holder.let {
+        it.clear()
+        it.onBind(position)
     }
 
-    override fun onBindViewHolder(holder: BlogViewHolder, position: Int) {
-        holder.clear()
-        holder.onBind(position)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BlogViewHolder {
-        return BlogViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.item_blog_list, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = BlogViewHolder(LayoutInflater.from(parent?.context)
+            .inflate(R.layout.item_blog_list, parent, false))
 
     internal fun addBlogsToList(blogs: List<Blog>) {
         this.blogListItems.addAll(blogs)
@@ -48,30 +45,41 @@ class BlogAdapter(blogListItems: MutableList<Blog>) : RecyclerView.Adapter<BlogA
 
         fun onBind(position: Int) {
             val blog = blogListItems[position]
-            if (blog.coverImgUrl != null) {
-                Glide.with(itemView.context)
-                        .load(blog.coverImgUrl)
-                        .asBitmap()
-                        .centerCrop()
-                        .into(itemView.coverImageView)
-            }
-            blog.title?.let { itemView.titleTextView.text = it }
-            blog.author?.let { itemView.authorTextView.text = it }
-            blog.date?.let { itemView.dateTextView.text = it }
-            blog.description?.let { itemView.contentTextView.text = it }
+            loadCoverPageImage(blog)
+            setDataToFields(blog)
+            setItemClickListener(blog)
+        }
 
+        private fun setItemClickListener(blog: Blog) {
             itemView.setOnClickListener {
                 blog.blogUrl?.let {
                     try {
                         val intent = Intent()
-                        intent.action = Intent.ACTION_VIEW
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE)
-                        intent.data = Uri.parse(it)
+                        intent.apply { action = Intent.ACTION_VIEW }
+                                .apply { data = Uri.parse(it) }
+                                .addCategory(Intent.CATEGORY_BROWSABLE)
                         itemView.context.startActivity(intent)
                     } catch (e: Exception) {
                     }
                 }
 
+            }
+        }
+
+        private fun setDataToFields(blog: Blog) {
+            blog.title?.let { itemView.titleTextView.text = it }
+            blog.author?.let { itemView.authorTextView.text = it }
+            blog.date?.let { itemView.dateTextView.text = it }
+            blog.description?.let { itemView.contentTextView.text = it }
+        }
+
+        private fun loadCoverPageImage(blog: Blog) {
+            blog.coverImgUrl?.let {
+                Glide.with(itemView.context)
+                        .load(it)
+                        .asBitmap()
+                        .centerCrop()
+                        .into(itemView.coverImageView)
             }
         }
     }

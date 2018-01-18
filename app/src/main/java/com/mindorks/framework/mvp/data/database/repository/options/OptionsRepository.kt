@@ -9,17 +9,12 @@ import javax.inject.Inject
  */
 class OptionsRepository @Inject constructor(private val optionsDao: OptionsDao) : OptionsRepo {
 
-    override fun isOptionsRepoEmpty(): Observable<Boolean> {
-        return Observable.just(optionsDao.loadAll().isEmpty())
-    }
+    override fun isOptionsRepoEmpty() = Observable.just(optionsDao.loadAll().isEmpty())
 
     override fun insertOptions(options: List<Options>): Observable<Boolean> {
         optionsDao.insertAll(options)
         return Observable.just(true)
     }
 
-    override fun loadOptions(questionId: Long): Single<List<Options>> {
-        return Single.fromCallable({ optionsDao.loadOptionsByQuestionId(questionId) })
-    }
-
+    override fun loadOptions(questionId: Long) = Single.fromCallable({ optionsDao.loadOptionsByQuestionId(questionId) })
 }

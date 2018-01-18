@@ -1,8 +1,8 @@
 package com.mindorks.framework.mvp.ui.feed.opensource
 
 import android.support.v7.widget.LinearLayoutManager
-import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceInterator
+import com.mindorks.framework.mvp.ui.feed.opensource.interactor.OpenSourceMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourceMVPPresenter
 import com.mindorks.framework.mvp.ui.feed.opensource.presenter.OpenSourcePresenter
 import com.mindorks.framework.mvp.ui.feed.opensource.view.OpenSourceAdapter
@@ -18,23 +18,17 @@ import dagger.Provides
 class OpenSourceFragmentModule {
 
     @Provides
-    internal fun provideOpenSourceInteractor(interactor: OpenSourceInterator): OpenSourceMVPInteractor {
-        return interactor
-    }
+    internal fun provideOpenSourceInteractor(interactor: OpenSourceInterator): OpenSourceMVPInteractor = interactor
 
     @Provides
-    internal fun provideOpenSourcePresenter(presenter: OpenSourcePresenter<OpenSourceMVPView, OpenSourceMVPInteractor>): OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor> {
-        return presenter
-    }
+    internal fun provideOpenSourcePresenter(presenter: OpenSourcePresenter<OpenSourceMVPView, OpenSourceMVPInteractor>)
+            : OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor> = presenter
 
     @Provides
-    internal fun provideOpenSourceAdapter(): OpenSourceAdapter {
-        return OpenSourceAdapter(ArrayList())
-    }
+    internal fun provideOpenSourceAdapter(): OpenSourceAdapter = OpenSourceAdapter(ArrayList())
 
     @Provides
-    internal fun provideLinearLayoutManager(fragment: OpenSourceFragment): LinearLayoutManager {
-        return LinearLayoutManager(fragment.activity)
-    }
+    internal fun provideLinearLayoutManager(fragment: OpenSourceFragment): LinearLayoutManager = LinearLayoutManager(fragment.activity)
+
 
 }

@@ -1,8 +1,8 @@
 package com.mindorks.framework.mvp.ui.feed.blog
 
 import android.support.v7.widget.LinearLayoutManager
-import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogInteractor
+import com.mindorks.framework.mvp.ui.feed.blog.interactor.BlogMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogMVPPresenter
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.BlogPresenter
 import com.mindorks.framework.mvp.ui.feed.blog.view.BlogAdapter
@@ -19,22 +19,16 @@ import java.util.*
 class BlogFragmentModule {
 
     @Provides
-    internal fun provideBlogInteractor(interactor: BlogInteractor): BlogMVPInteractor {
-        return interactor
-    }
+    internal fun provideBlogInteractor(interactor: BlogInteractor): BlogMVPInteractor = interactor
 
     @Provides
-    internal fun provideBlogPresenter(presenter: BlogPresenter<BlogMVPView, BlogMVPInteractor>): BlogMVPPresenter<BlogMVPView, BlogMVPInteractor> {
-        return presenter
-    }
+    internal fun provideBlogPresenter(presenter: BlogPresenter<BlogMVPView, BlogMVPInteractor>)
+            : BlogMVPPresenter<BlogMVPView, BlogMVPInteractor> = presenter
 
     @Provides
-    internal fun provideBlogAdapter(): BlogAdapter {
-        return BlogAdapter(ArrayList())
-    }
+    internal fun provideBlogAdapter(): BlogAdapter = BlogAdapter(ArrayList())
 
     @Provides
-    internal fun provideLinearLayoutManager(fragment: BlogFragment): LinearLayoutManager {
-        return LinearLayoutManager(fragment.activity)
-    }
+    internal fun provideLinearLayoutManager(fragment: BlogFragment): LinearLayoutManager = LinearLayoutManager(fragment.activity)
+
 }

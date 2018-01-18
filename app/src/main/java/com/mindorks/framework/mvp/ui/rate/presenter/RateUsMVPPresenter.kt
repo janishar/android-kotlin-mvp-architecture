@@ -9,6 +9,6 @@ import com.mindorks.framework.mvp.ui.rate.view.RateUsDialogMVPView
  */
 interface RateUsMVPPresenter<V : RateUsDialogMVPView, I : RateUsMVPInterator> : MVPPresenter<V, I> {
 
-    fun onLaterOptionClicked()
-    fun onSubmitOptionClicked()
+    fun onLaterOptionClicked() : Unit?
+    fun onSubmitOptionClicked() : Unit?
 }

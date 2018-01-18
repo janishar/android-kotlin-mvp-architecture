@@ -56,9 +56,8 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
                 2 -> button = mOption3Button
             }
             button?.text = mQuestion.option[i].optionText
-            if (mQuestion.question.imgUrl != null) {
-                mPicImageView.setImageUrl(mQuestion.question.imgUrl)
-            }
+            mQuestion.question.imgUrl?.let { mPicImageView.setImageUrl(it) }
+
         }
     }
 
@@ -71,13 +70,10 @@ class QuestionCard(private val mQuestion: QuestionCardData) {
                 1 -> button = mOption2Button
                 2 -> button = mOption3Button
             }
-            if (button != null) {
-                if (option.isCorrect) {
-                    button.setBackgroundColor(Color.GREEN)
-                } else {
-                    button.setBackgroundColor(Color.RED)
-                }
+            button?.let{
+                if(option.isCorrect) it.setBackgroundColor(Color.GREEN) else it.setBackgroundColor(Color.RED)
             }
+
         }
     }
 

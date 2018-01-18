@@ -19,8 +19,9 @@ import com.mindorks.framework.mvp.ui.main.interactor.QuestionCardData
 import com.mindorks.framework.mvp.ui.main.presenter.MainMVPPresenter
 import com.mindorks.framework.mvp.ui.rate.view.RateUsDialog
 import com.mindorks.framework.mvp.util.ScreenUtils
+import com.mindorks.framework.mvp.util.addFragment
+import com.mindorks.framework.mvp.util.removeFragment
 import com.mindorks.placeholderview.SwipeDecor
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,8 +50,7 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
-        val fragmentManager = supportFragmentManager
-        val fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG)
+        val fragment = supportFragmentManager.findFragmentByTag(AboutFragment.TAG)
         fragment?.let { onFragmentDetached(AboutFragment.TAG) } ?: let { super.onBackPressed() }
     }
 
@@ -60,16 +60,8 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     }
 
     override fun onFragmentDetached(tag: String) {
-        val fragmentManager = supportFragmentManager
-        val fragment = fragmentManager.findFragmentByTag(tag)
-        fragmentManager?.let {
-            it.beginTransaction()
-                    .disallowAddToBackStack()
-                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                    .remove(fragment)
-                    .commitNow()
-            unlockDrawer()
-        }
+        supportFragmentManager?.removeFragment(tag = tag)
+        unlockDrawer()
     }
 
     override fun onFragmentAttached() {
@@ -94,13 +86,9 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         return true
     }
 
-    override fun lockDrawer() {
-        drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-    }
+    override fun lockDrawer() = drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
-    override fun unlockDrawer() {
-        drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-    }
+    override fun unlockDrawer() = drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
     override fun displayQuestionCard(questionCards: List<QuestionCardData>) {
         for (questionCard in questionCards) {
@@ -121,10 +109,7 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
     override fun openAboutFragment() {
         lockDrawer()
-        supportFragmentManager.beginTransaction().disallowAddToBackStack()
-                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.cl_root_view, AboutFragment.newInstance(), AboutFragment.TAG)
-                .commit()
+        supportFragmentManager.addFragment(R.id.cl_root_view, AboutFragment.newInstance(), AboutFragment.TAG)
     }
 
     override fun openFeedActivity() {
@@ -132,15 +117,11 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         startActivity(intent)
     }
 
-    override fun openRateUsDialog() {
-        RateUsDialog.newInstance()?.let {
-            it.show(supportFragmentManager)
-        }
+    override fun openRateUsDialog() = RateUsDialog.newInstance()?.let {
+        it.show(supportFragmentManager)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentDispatchingAndroidInjector
-    }
+    override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector
 
     private fun setUpDrawerMenu() {
         setSupportActionBar(toolbar)
@@ -150,6 +131,7 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
+
     }
 
     private fun setupCardContainerView() {

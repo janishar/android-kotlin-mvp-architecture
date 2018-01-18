@@ -29,6 +29,7 @@ class BlogFragment : BaseFragment(), BlogMVPView {
         }
     }
 
+
     @Inject
     internal lateinit var blogAdapter: BlogAdapter
     @Inject
@@ -36,9 +37,10 @@ class BlogFragment : BaseFragment(), BlogMVPView {
     @Inject
     internal lateinit var presenter: BlogMVPPresenter<BlogMVPView, BlogMVPInteractor>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_blog, container, false)
-    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
+            = inflater.inflate(R.layout.fragment_blog, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter.onAttach(this)
@@ -53,10 +55,8 @@ class BlogFragment : BaseFragment(), BlogMVPView {
         presenter.onViewPrepared()
     }
 
-    override fun displayBlogList(blogs: List<Blog>?) {
-        blogs?.let {
-            blogAdapter.addBlogsToList(it)
-        }
+    override fun displayBlogList(blogs: List<Blog>?) = blogs?.let {
+        blogAdapter.addBlogsToList(it)
     }
 
     override fun onDestroyView() {

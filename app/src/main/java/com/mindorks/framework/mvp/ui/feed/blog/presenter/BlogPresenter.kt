@@ -18,8 +18,10 @@ class BlogPresenter<V : BlogMVPView, I : BlogMVPInteractor> @Inject constructor(
             it.getBlogList()
                     .compose(schedulerProvider.ioToMainObservableScheduler())
                     .subscribe { blogResponse ->
-                        getView()?.hideProgress()
-                        getView()?.displayBlogList(blogResponse.data)
+                        getView()?.let {
+                            it.hideProgress()
+                            it.displayBlogList(blogResponse.data)
+                        }
                     }
         }
     }

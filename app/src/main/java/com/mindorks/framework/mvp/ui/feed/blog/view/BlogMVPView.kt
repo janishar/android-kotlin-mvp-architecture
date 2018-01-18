@@ -8,6 +8,6 @@ import com.mindorks.framework.mvp.ui.base.view.MVPView
  */
 interface BlogMVPView : MVPView {
 
-    fun displayBlogList(blogs: List<Blog>?)
+    fun displayBlogList(blogs: List<Blog>?) : Unit?
 
 }

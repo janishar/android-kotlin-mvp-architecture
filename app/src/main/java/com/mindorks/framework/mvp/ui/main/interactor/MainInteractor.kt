@@ -5,11 +5,8 @@ import com.mindorks.framework.mvp.data.database.repository.options.OptionsRepo
 import com.mindorks.framework.mvp.data.database.repository.questions.Question
 import com.mindorks.framework.mvp.data.database.repository.questions.QuestionRepo
 import com.mindorks.framework.mvp.data.network.ApiHelper
-import com.mindorks.framework.mvp.data.network.LogoutResponse
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.ui.base.interactor.BaseInteractor
-import io.reactivex.Observable
-import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -17,28 +14,21 @@ import javax.inject.Inject
  */
 class MainInteractor @Inject internal constructor(private val questionRepoHelper: QuestionRepo, private val optionsRepoHelper: OptionsRepo, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper = preferenceHelper, apiHelper = apiHelper), MainMVPInteractor {
 
-    override fun getQuestionCardData(): Single<List<QuestionCardData>> {
-        return questionRepoHelper.loadQuestions()
-                .flatMapIterable { question -> question }
-                .flatMapSingle { question -> getQuestionCards(question) }
-                .toList()
-    }
+    override fun getQuestionCardData() = questionRepoHelper.loadQuestions()
+            .flatMapIterable { question -> question }
+            .flatMapSingle { question -> getQuestionCards(question) }
+            .toList()
 
-    override fun getUserDetails(): Pair<String?, String?> {
-        return Pair(preferenceHelper.getCurrentUserName(), preferenceHelper.getCurrentUserEmail())
-    }
+    override fun getUserDetails() = Pair(preferenceHelper.getCurrentUserName(),
+            preferenceHelper.getCurrentUserEmail())
 
-    override fun makeLogoutApiCall(): Observable<LogoutResponse> {
-        return apiHelper.performLogoutApiCall()
-    }
+    override fun makeLogoutApiCall() = apiHelper.performLogoutApiCall()
 
-    private fun getQuestionCards(question: Question): Single<QuestionCardData> {
-        return optionsRepoHelper.loadOptions(question.id).map { options -> createQuestionCard(options, question) }
-    }
+    private fun getQuestionCards(question: Question) = optionsRepoHelper.loadOptions(question.id)
+            .map { options -> createQuestionCard(options, question) }
 
-    private fun createQuestionCard(options: List<Options>, question: Question): QuestionCardData {
-        return QuestionCardData(options, question)
-    }
+    private fun createQuestionCard(options: List<Options>, question: Question) = QuestionCardData(options, question)
+
 }
 
 

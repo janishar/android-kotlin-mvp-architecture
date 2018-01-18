@@ -13,16 +13,17 @@ object CommonUtil {
 
     fun showLoadingDialog(context: Context?): ProgressDialog {
         val progressDialog = ProgressDialog(context)
-        progressDialog.show()
-        if (progressDialog.window != null) {
-            progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.let {
+            it.show()
+            it.window?.let {
+                it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            }
+            it.setContentView(R.layout.progress_dialog)
+            it.isIndeterminate = true
+            it.setCancelable(false)
+            it.setCanceledOnTouchOutside(false)
+            return it
         }
-        progressDialog.setContentView(R.layout.progress_dialog)
-        progressDialog.isIndeterminate = true
-        progressDialog.setCancelable(false)
-        progressDialog.setCanceledOnTouchOutside(false)
-        return progressDialog
-
     }
 
 }

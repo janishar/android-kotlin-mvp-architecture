@@ -12,15 +12,12 @@ import dagger.Provides
  * Created by jyotidubey on 15/01/18.
  */
 @Module
-class RateUsFragmentModule{
+class RateUsFragmentModule {
 
     @Provides
-    internal fun provideRateUsInteractor(interactor: RateUsInteractor): RateUsMVPInterator {
-        return interactor
-    }
+    internal fun provideRateUsInteractor(interactor: RateUsInteractor): RateUsMVPInterator = interactor
 
     @Provides
-    internal fun provideRateUsPresenter(presenter: RateUsPresenter<RateUsDialogMVPView, RateUsMVPInterator>): RateUsMVPPresenter<RateUsDialogMVPView, RateUsMVPInterator> {
-        return presenter
-    }
+    internal fun provideRateUsPresenter(presenter: RateUsPresenter<RateUsDialogMVPView, RateUsMVPInterator>)
+            : RateUsMVPPresenter<RateUsDialogMVPView, RateUsMVPInterator> = presenter
 }

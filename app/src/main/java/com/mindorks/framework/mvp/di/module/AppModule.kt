@@ -30,70 +30,48 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideContext(application: Application): Context {
-        return application
-    }
+    internal fun provideContext(application: Application): Context = application
 
     @Provides
     @Singleton
-    internal fun provideAppDatabase(context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME)
-                .build()
-    }
+    internal fun provideAppDatabase(context: Context): AppDatabase
+            = Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME).build()
 
     @Provides
-    internal fun provideApiKey(): String {
-        return BuildConfig.API_KEY
-    }
+    internal fun provideApiKey(): String = BuildConfig.API_KEY
 
     @Provides
     @PreferenceInfo
-    internal fun provideprefFileName(): String {
-        return AppConstants.PREF_NAME
-    }
+    internal fun provideprefFileName(): String = AppConstants.PREF_NAME
 
     @Provides
     @Singleton
-    internal fun providePrefHelper(appPreferenceHelper: AppPreferenceHelper): PreferenceHelper {
-        return appPreferenceHelper
-    }
+    internal fun providePrefHelper(appPreferenceHelper: AppPreferenceHelper): PreferenceHelper = appPreferenceHelper
 
     @Provides
     @Singleton
-    internal fun provideProtectedApiHeader(apiKey: String, preferenceHelper: PreferenceHelper): ApiHeader.ProtectedApiHeader {
-        return ApiHeader.ProtectedApiHeader(apiKey = apiKey,
-                userId = preferenceHelper.getCurrentUserId(),
-                accessToken = preferenceHelper.getAccessToken())
-    }
+    internal fun provideProtectedApiHeader(apiKey: String, preferenceHelper: PreferenceHelper)
+            : ApiHeader.ProtectedApiHeader = ApiHeader.ProtectedApiHeader(apiKey = apiKey,
+            userId = preferenceHelper.getCurrentUserId(),
+            accessToken = preferenceHelper.getAccessToken())
 
     @Provides
     @Singleton
-    internal fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper {
-        return appApiHelper
-    }
-
+    internal fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper = appApiHelper
 
     @Provides
     @Singleton
-    internal fun provideQuestionRepoHelper(appDatabase: AppDatabase): QuestionRepo {
-        return QuestionRepository(appDatabase.questionsDao())
-    }
+    internal fun provideQuestionRepoHelper(appDatabase: AppDatabase): QuestionRepo = QuestionRepository(appDatabase.questionsDao())
 
     @Provides
     @Singleton
-    internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepo {
-        return OptionsRepository(appDatabase.optionsDao())
-    }
+    internal fun provideOptionsRepoHelper(appDatabase: AppDatabase): OptionsRepo = OptionsRepository(appDatabase.optionsDao())
 
     @Provides
-    internal fun provideCompositeDisposable(): CompositeDisposable {
-        return CompositeDisposable()
-    }
+    internal fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @Provides
-    internal fun provideSchedulerProvider(): SchedulerProvider {
-        return SchedulerProvider()
-    }
+    internal fun provideSchedulerProvider(): SchedulerProvider = SchedulerProvider()
 
 
 }

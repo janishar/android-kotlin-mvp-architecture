@@ -49,13 +49,9 @@ abstract class BaseFragment : Fragment(), MVPView {
         progressDialog = CommonUtil.showLoadingDialog(this.context)
     }
 
-    fun getBaseActivity(): BaseActivity? {
-        return parentActivity
-    }
+    fun getBaseActivity() = parentActivity
 
-    private fun performDependencyInjection() {
-        AndroidSupportInjection.inject(this)
-    }
+    private fun performDependencyInjection() = AndroidSupportInjection.inject(this)
 
     interface CallBack {
         fun onFragmentAttached()

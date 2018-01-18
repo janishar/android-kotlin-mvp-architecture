@@ -18,8 +18,10 @@ class OpenSourcePresenter<V : OpenSourceMVPView, I : OpenSourceMVPInteractor> @I
             compositeDisposable.add(it.getOpenSourceList()
                     .compose(schedulerProvider.ioToMainObservableScheduler())
                     .subscribe { openSourceResponse ->
-                        getView()?.hideProgress()
-                        getView()?.displayOpenSourceList(openSourceResponse.data)
+                        getView()?.let {
+                            it.hideProgress()
+                            it.displayOpenSourceList(openSourceResponse.data)
+                        }
                     })
         }
 

@@ -1,7 +1,7 @@
 package com.mindorks.framework.mvp.ui.main
 
-import com.mindorks.framework.mvp.ui.main.interactor.MainMVPInteractor
 import com.mindorks.framework.mvp.ui.main.interactor.MainInteractor
+import com.mindorks.framework.mvp.ui.main.interactor.MainMVPInteractor
 import com.mindorks.framework.mvp.ui.main.presenter.MainMVPPresenter
 import com.mindorks.framework.mvp.ui.main.presenter.MainPresenter
 import com.mindorks.framework.mvp.ui.main.view.MainMVPView
@@ -15,12 +15,10 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    internal fun provideMainInteractor(mainInteractorImpl: MainInteractor): MainMVPInteractor {
-        return mainInteractorImpl
-    }
+    internal fun provideMainInteractor(mainInteractor: MainInteractor): MainMVPInteractor = mainInteractor
 
     @Provides
-    internal fun provideMainPresenter(mainPresenterImpl: MainPresenter<MainMVPView, MainMVPInteractor>): MainMVPPresenter<MainMVPView, MainMVPInteractor> {
-        return mainPresenterImpl
-    }
+    internal fun provideMainPresenter(mainPresenter: MainPresenter<MainMVPView, MainMVPInteractor>)
+            : MainMVPPresenter<MainMVPView, MainMVPInteractor> = mainPresenter
+
 }

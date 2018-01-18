@@ -20,7 +20,7 @@ abstract class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.CallBac
     }
 
     override fun hideProgress() {
-        progressDialog?.let { if(it.isShowing) it.cancel() }
+        progressDialog?.let { if (it.isShowing) it.cancel() }
     }
 
     override fun showProgress() {
@@ -28,8 +28,7 @@ abstract class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.CallBac
         progressDialog = CommonUtil.showLoadingDialog(this)
     }
 
-    private fun performDI() {
-        AndroidInjection.inject(this)
-    }
+    private fun performDI() = AndroidInjection.inject(this)
+
 
 }

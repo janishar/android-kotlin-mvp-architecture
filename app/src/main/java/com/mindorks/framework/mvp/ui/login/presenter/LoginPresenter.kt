@@ -24,14 +24,17 @@ class LoginPresenter<V : LoginMVPView, I : LoginMVPInteractor> @Inject internal 
                     compositeDisposable.add(it.doServerLoginApiCall(email, password)
                             .compose(schedulerProvider.ioToMainObservableScheduler())
                             .subscribe({ loginResponse ->
-                                if ("success" == loginResponse.message.toString()) {
-                                    updateUserInSharedPref(loginResponse = loginResponse,
-                                            loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
-                                    getView()?.openMainActivity()
-                                } else {
-                                    getView()?.showValidationMessage(AppConstants.LOGIN_FAILURE)
+                                when (loginResponse.message.toString()) {
+                                    "success" -> {
+                                        updateUserInSharedPref(loginResponse = loginResponse,
+                                                loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
+                                        getView()?.openMainActivity()
+                                    }
+                                    else -> {
+                                        getView()?.showValidationMessage(AppConstants.LOGIN_FAILURE)
+                                    }
                                 }
-                            }))
+                            }, { err -> println(err) }))
                 }
 
             }
@@ -43,12 +46,14 @@ class LoginPresenter<V : LoginMVPView, I : LoginMVPInteractor> @Inject internal 
         interactor?.let {
             compositeDisposable.add(it.doFBLoginApiCall()
                     .compose(schedulerProvider.ioToMainObservableScheduler())
-                    .subscribe { loginResponse ->
-                        getView()?.hideProgress()
+                    .subscribe({ loginResponse ->
                         updateUserInSharedPref(loginResponse = loginResponse,
                                 loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_FB)
-                        getView()?.openMainActivity()
-                    })
+                        getView()?.let {
+                            it.hideProgress()
+                            it.openMainActivity()
+                        }
+                    }, { err -> println(err) }))
         }
 
 
@@ -59,18 +64,21 @@ class LoginPresenter<V : LoginMVPView, I : LoginMVPInteractor> @Inject internal 
         interactor?.let {
             compositeDisposable.add(it.doGoogleLoginApiCall()
                     .compose(schedulerProvider.ioToMainObservableScheduler())
-                    .subscribe { loginResponse ->
-                        getView()?.hideProgress()
+                    .subscribe({ loginResponse ->
                         updateUserInSharedPref(loginResponse = loginResponse,
                                 loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_GOOGLE)
-                        getView()?.openMainActivity()
-                    })
+                        getView()?.let {
+                            it.hideProgress()
+                            it.openMainActivity()
+                        }
+                    }, { err -> println(err) }))
         }
 
     }
 
-    private fun updateUserInSharedPref(loginResponse: LoginResponse, loggedInMode: AppConstants.LoggedInMode) {
-        interactor?.updateUserInSharedPref(loginResponse, loggedInMode)
-    }
+    private fun updateUserInSharedPref(loginResponse: LoginResponse,
+                                       loggedInMode: AppConstants.LoggedInMode) =
+            interactor?.updateUserInSharedPref(loginResponse, loggedInMode)
+
 
 }

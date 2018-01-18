@@ -15,12 +15,9 @@ import dagger.Provides
 class SplashActivityModule {
 
     @Provides
-    internal fun provideSplashInteractor(splashInteractor: SplashInteractor): SplashMVPInteractor {
-        return splashInteractor
-    }
+    internal fun provideSplashInteractor(splashInteractor: SplashInteractor): SplashMVPInteractor = splashInteractor
 
     @Provides
-    internal fun provideSplashPresenter(splashPresenter: SplashPresenter<SplashMVPView, SplashMVPInteractor>): SplashMVPPresenter<SplashMVPView, SplashMVPInteractor> {
-        return splashPresenter
-    }
+    internal fun provideSplashPresenter(splashPresenter: SplashPresenter<SplashMVPView, SplashMVPInteractor>)
+            : SplashMVPPresenter<SplashMVPView, SplashMVPInteractor> = splashPresenter
 }

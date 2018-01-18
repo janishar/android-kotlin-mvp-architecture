@@ -23,9 +23,7 @@ class FeedPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
             0 -> BlogFragment.newInstance()
             1 -> OpenSourceFragment.newInstance()
             else -> null
-
         }
-
     }
 
     internal fun setCount(count: Int) {

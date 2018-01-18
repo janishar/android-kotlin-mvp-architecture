@@ -19,20 +19,17 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
 
     private val openSourceListItems: MutableList<OpenSource> = openSourceListItems
 
-    override fun getItemCount(): Int {
-        return this.openSourceListItems.size
+
+    override fun getItemCount() = openSourceListItems.size
+
+    override fun onBindViewHolder(holder: OpenSourceViewHolder, position: Int) = holder.let {
+        it.clear()
+        it.onBind(position)
     }
 
-    override fun onBindViewHolder(holder: OpenSourceViewHolder, position: Int) {
-        holder.clear()
-        holder.onBind(position)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = OpenSourceViewHolder(LayoutInflater.from(parent?.context)
+            .inflate(R.layout.item_open_source_list, parent, false))
 
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): OpenSourceViewHolder {
-        return OpenSourceViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.item_open_source_list, parent, false))
-    }
 
     internal fun addOpenSourcesToList(OpenSources: List<OpenSource>) {
         this.openSourceListItems.addAll(OpenSources)
@@ -49,29 +46,40 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
 
         fun onBind(position: Int) {
             val openSource = openSourceListItems[position]
-            if (openSource.coverImgUrl != null) {
-                Glide.with(itemView.context)
-                        .load(openSource.coverImgUrl)
-                        .asBitmap()
-                        .centerCrop()
-                        .into(itemView.coverImageView)
-            }
-            openSource.title?.let { itemView.titleTextView.text = it }
-            openSource.description?.let { itemView.contentTextView.text = it }
+            loadCoverPageImage(openSource)
+            setDataToFields(openSource)
+            setItemClickListener(openSource)
+        }
 
+        private fun setItemClickListener(openSource: OpenSource) {
             itemView.setOnClickListener {
                 openSource.projectUrl?.let {
                     try {
                         val intent = Intent()
-                        intent.action = Intent.ACTION_VIEW
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE)
-                        intent.data = Uri.parse(it)
+                        intent.apply { action = Intent.ACTION_VIEW }
+                                .apply { data = Uri.parse(it) }
+                                .addCategory(Intent.CATEGORY_BROWSABLE)
                         itemView.context.startActivity(intent)
                     } catch (e: Exception) {
                     }
                 }
-
             }
+        }
+
+        private fun setDataToFields(openSource: OpenSource) {
+            openSource.title?.let { itemView.titleTextView.text = it }
+            openSource.description?.let { itemView.contentTextView.text = it }
+        }
+
+        private fun loadCoverPageImage(openSource: OpenSource) {
+            openSource.coverImgUrl?.let {
+                Glide.with(itemView.context)
+                        .load(it)
+                        .asBitmap()
+                        .centerCrop()
+                        .into(itemView.coverImageView)
+            }
+
         }
     }
 }

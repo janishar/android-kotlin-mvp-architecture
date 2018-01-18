@@ -9,10 +9,10 @@ import com.mindorks.framework.mvp.ui.main.view.MainMVPView
  */
 interface MainMVPPresenter<V : MainMVPView, I : MainMVPInteractor> : MVPPresenter<V, I> {
 
-    fun refreshQuestionCards()
-    fun onDrawerOptionAboutClick()
-    fun onDrawerOptionRateUsClick()
-    fun onDrawerOptionFeedClick()
+    fun refreshQuestionCards(): Boolean?
+    fun onDrawerOptionAboutClick() : Unit?
+    fun onDrawerOptionRateUsClick(): Unit?
+    fun onDrawerOptionFeedClick(): Unit?
     fun onDrawerOptionLogoutClick()
 
 }

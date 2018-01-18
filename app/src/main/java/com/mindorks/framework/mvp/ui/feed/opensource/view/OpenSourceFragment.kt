@@ -28,12 +28,11 @@ class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
         }
     }
 
+
     @Inject
     internal lateinit var openSourceAdapter: OpenSourceAdapter
-
     @Inject
     internal lateinit var layoutManager: LinearLayoutManager
-
     @Inject
     internal lateinit var presenter: OpenSourceMVPPresenter<OpenSourceMVPView, OpenSourceMVPInteractor>
 

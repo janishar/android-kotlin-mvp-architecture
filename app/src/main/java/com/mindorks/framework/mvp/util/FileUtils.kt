@@ -11,15 +11,15 @@ object FileUtils {
 
     @Throws(IOException::class)
     fun loadJSONFromAsset(context: Context, jsonFileName: String): String {
-
-        val manager = context.assets
-        val inputStream = manager.open(jsonFileName)
-
-        val size = inputStream.available()
-        val buffer = ByteArray(size)
-        inputStream.read(buffer)
-        inputStream.close()
-
-        return String(buffer, Charset.forName("UTF-8"))
+        (context.assets).let {
+            it.open(jsonFileName)
+        }.let {
+            val buffer = ByteArray(it.available())
+            it.read(buffer)
+            it.close()
+            buffer
+        }.let {
+            return String(it, Charset.forName("UTF-8"))
+        }
     }
 }

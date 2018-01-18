@@ -22,13 +22,19 @@ class AppPreferenceHelper @Inject constructor(context: Context,
     private val mPrefs: SharedPreferences = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE)
 
 
-    override fun getCurrentUserLoggedInMode(): Int {
-        return mPrefs.getInt(PREF_KEY_USER_LOGGED_IN_MODE, AppConstants.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.type)
-    }
+    override fun getCurrentUserLoggedInMode() = mPrefs.getInt(PREF_KEY_USER_LOGGED_IN_MODE, AppConstants.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.type)
 
-    override fun setCurrentUserLoggedInMode(mode: AppConstants.LoggedInMode) {
-        mPrefs.edit().putInt(PREF_KEY_USER_LOGGED_IN_MODE, mode.type).apply()
-    }
+    override fun getCurrentUserName() = mPrefs.getString(PREF_KEY_CURRENT_USER_NAME, "ABC")
+
+    override fun setCurrentUserName(userName: String?) = mPrefs.edit().putString(PREF_KEY_CURRENT_USER_NAME, userName).apply()
+
+    override fun getCurrentUserEmail() = mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL, "abc@gmail.com")
+
+    override fun setCurrentUserEmail(email: String?) = mPrefs.edit().putString(PREF_KEY_CURRENT_USER_EMAIL, email).apply()
+
+    override fun getAccessToken() = mPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
+
+    override fun setAccessToken(accessToken: String?) = mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
 
     override fun getCurrentUserId(): Long? {
         val userId = mPrefs.getLong(PREF_KEY_CURRENT_USER_ID, AppConstants.NULL_INDEX)
@@ -43,27 +49,7 @@ class AppPreferenceHelper @Inject constructor(context: Context,
         mPrefs.edit().putLong(PREF_KEY_CURRENT_USER_ID, id).apply()
     }
 
-    override fun getCurrentUserName(): String {
-        return mPrefs.getString(PREF_KEY_CURRENT_USER_NAME, "ABC")
-    }
-
-    override fun setCurrentUserName(userName: String?) {
-        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_NAME, userName).apply()
-    }
-
-    override fun getCurrentUserEmail(): String {
-        return mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL, "abc@gmail.com")
-    }
-
-    override fun setCurrentUserEmail(email: String?) {
-        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_EMAIL, email).apply()
-    }
-
-    override fun getAccessToken(): String? {
-        return mPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
-    }
-
-    override fun setAccessToken(accessToken: String?) {
-        mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
+    override fun setCurrentUserLoggedInMode(mode: AppConstants.LoggedInMode) {
+        mPrefs.edit().putInt(PREF_KEY_USER_LOGGED_IN_MODE, mode.type).apply()
     }
 }

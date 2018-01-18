@@ -6,7 +6,6 @@ import com.mindorks.framework.mvp.data.network.LoginResponse
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
 import com.mindorks.framework.mvp.ui.base.interactor.BaseInteractor
 import com.mindorks.framework.mvp.util.AppConstants
-import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -14,23 +13,21 @@ import javax.inject.Inject
  */
 class LoginInteractor @Inject internal constructor(preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : BaseInteractor(preferenceHelper, apiHelper), LoginMVPInteractor {
 
-    override fun doGoogleLoginApiCall(): Observable<LoginResponse> {
-        return apiHelper.performGoogleLogin(LoginRequest.GoogleLoginRequest("test1", "test1"))
-    }
+    override fun doGoogleLoginApiCall() =
+            apiHelper.performGoogleLogin(LoginRequest.GoogleLoginRequest("test1", "test1"))
 
-    override fun doFBLoginApiCall(): Observable<LoginResponse> {
-        return apiHelper.performFBLogin(LoginRequest.FacebookLoginRequest("test3", "test4"))
-    }
-
-    override fun doServerLoginApiCall(email: String, password: String): Observable<LoginResponse> {
-        return return apiHelper.performServerLogin(LoginRequest.ServerLoginRequest(email = email, password = password))
-    }
-
-    override fun updateUserInSharedPref(loginResponse: LoginResponse, loggedInMode: AppConstants.LoggedInMode) {
-        preferenceHelper.setCurrentUserId(loginResponse.userId)
-        preferenceHelper.setAccessToken(loginResponse.accessToken)
-        preferenceHelper.setCurrentUserLoggedInMode(loggedInMode)
-    }
+    override fun doFBLoginApiCall() =
+            apiHelper.performFBLogin(LoginRequest.FacebookLoginRequest("test3", "test4"))
 
 
+    override fun doServerLoginApiCall(email: String, password: String) =
+            apiHelper.performServerLogin(LoginRequest.ServerLoginRequest(email = email, password = password))
+
+
+    override fun updateUserInSharedPref(loginResponse: LoginResponse, loggedInMode: AppConstants.LoggedInMode) =
+            preferenceHelper.let {
+                it.setCurrentUserId(loginResponse.userId)
+                it.setAccessToken(loginResponse.accessToken)
+                it.setCurrentUserLoggedInMode(loggedInMode)
+            }
 }

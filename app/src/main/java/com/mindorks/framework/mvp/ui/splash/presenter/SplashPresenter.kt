@@ -17,25 +17,20 @@ class SplashPresenter<V : SplashMVPView, I : SplashMVPInteractor> @Inject intern
         feedInDatabase()
     }
 
-    private fun feedInDatabase() {
-        interactor?.let {
-            compositeDisposable.add(it.seedQuestions()
-                    .flatMap { interactor?.seedOptions() }
-                    .compose(schedulerProvider.ioToMainObservableScheduler())
-                    .subscribe({
-                        if (getView() != null) {
-                            decideActivityToOpen()
-                        }
-                    }))
-        }
+    private fun feedInDatabase() = interactor?.let {
+        compositeDisposable.add(it.seedQuestions()
+                .flatMap { interactor?.seedOptions() }
+                .compose(schedulerProvider.ioToMainObservableScheduler())
+                .subscribe({
+                    getView()?.let { decideActivityToOpen() }
+                }))
     }
 
-    private fun decideActivityToOpen() {
-        if (isUserLoggedIn()) {
-            getView()?.openMainActivity()
-        } else {
-            getView()?.openLoginActivity()
-        }
+    private fun decideActivityToOpen() = getView()?.let {
+        if (isUserLoggedIn())
+            it.openMainActivity()
+        else
+            it.openLoginActivity()
     }
 
     private fun isUserLoggedIn(): Boolean {
