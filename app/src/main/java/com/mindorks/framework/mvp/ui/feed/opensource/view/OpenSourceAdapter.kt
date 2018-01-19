@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.OpenSource
+import com.mindorks.framework.mvp.util.loadImage
 import kotlinx.android.synthetic.main.item_open_source_list.view.*
 
 
@@ -45,15 +45,15 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
         }
 
         fun onBind(position: Int) {
-            val openSource = openSourceListItems[position]
-            loadCoverPageImage(openSource)
-            setDataToFields(openSource)
-            setItemClickListener(openSource)
+            val (projectUrl, coverImgUrl, title, description) = openSourceListItems[position]
+
+            inflateData(title, description, coverImgUrl)
+            setItemClickListener(projectUrl)
         }
 
-        private fun setItemClickListener(openSource: OpenSource) {
+        private fun setItemClickListener(projectUrl: String?) {
             itemView.setOnClickListener {
-                openSource.projectUrl?.let {
+                projectUrl?.let {
                     try {
                         // using "apply" as an example
                         itemView.context.startActivity(Intent().apply {
@@ -67,20 +67,12 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
             }
         }
 
-        private fun setDataToFields(openSource: OpenSource) {
-            openSource.title?.let { itemView.titleTextView.text = it }
-            openSource.description?.let { itemView.contentTextView.text = it }
-        }
-
-        private fun loadCoverPageImage(openSource: OpenSource) {
-            openSource.coverImgUrl?.let {
-                Glide.with(itemView.context)
-                        .load(it)
-                        .asBitmap()
-                        .centerCrop()
-                        .into(itemView.coverImageView)
+        private fun inflateData(title: String?, description: String?, coverImgUrl: String?) {
+            title?.let { itemView.titleTextView.text = it }
+            description?.let { itemView.contentTextView.text = it }
+            coverImgUrl?.let {
+                itemView.coverImageView.loadImage(it)
             }
-
         }
     }
 }
