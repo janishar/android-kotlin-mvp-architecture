@@ -16,12 +16,11 @@ class AboutFragment : BaseFragment() {
     companion object {
 
         internal val TAG = "AboutFragment"
-        private var instance: AboutFragment? = null
 
-        internal fun newInstance(): AboutFragment {
-            instance ?: run { instance = AboutFragment() }
-            return instance as AboutFragment
+        fun newInstance(): AboutFragment {
+            return AboutFragment()
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
