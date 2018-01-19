@@ -10,6 +10,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 internal abstract class OpenSourceFragmentProvider {
 
-    @ContributesAndroidInjector(modules = arrayOf(OpenSourceFragmentModule::class))
+    @ContributesAndroidInjector(modules = [(OpenSourceFragmentModule::class)])
     internal abstract fun provideBlogFragmentFactory(): OpenSourceFragment
+
 }
