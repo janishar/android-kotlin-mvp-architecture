@@ -20,14 +20,12 @@ import javax.inject.Inject
 class OpenSourceFragment : BaseFragment(), OpenSourceMVPView {
 
     companion object {
-        private var instance: OpenSourceFragment? = null
 
-        internal fun newInstance(): OpenSourceFragment {
-            instance ?: run { instance = OpenSourceFragment() }
-            return instance as OpenSourceFragment
+        fun newInstance(): OpenSourceFragment {
+            return OpenSourceFragment()
         }
-    }
 
+    }
 
     @Inject
     internal lateinit var openSourceAdapter: OpenSourceAdapter

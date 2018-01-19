@@ -21,14 +21,12 @@ import javax.inject.Inject
 class BlogFragment : BaseFragment(), BlogMVPView {
 
     companion object {
-        private var instance: BlogFragment? = null
 
-        internal fun newInstance(): BlogFragment {
-            instance ?: run { instance = BlogFragment() }
-            return instance as BlogFragment
+        fun newInstance(): BlogFragment {
+            return BlogFragment()
         }
-    }
 
+    }
 
     @Inject
     internal lateinit var blogAdapter: BlogAdapter

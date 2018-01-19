@@ -24,7 +24,7 @@ class LoginPresenter<V : LoginMVPView, I : LoginMVPInteractor> @Inject internal 
                     compositeDisposable.add(it.doServerLoginApiCall(email, password)
                             .compose(schedulerProvider.ioToMainObservableScheduler())
                             .subscribe({ loginResponse ->
-                                when (loginResponse.message.toString()) {
+                                when (loginResponse.statusCode.toString()) {
                                     "success" -> {
                                         updateUserInSharedPref(loginResponse = loginResponse,
                                                 loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
