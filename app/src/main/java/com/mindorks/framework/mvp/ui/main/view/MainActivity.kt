@@ -19,8 +19,8 @@ import com.mindorks.framework.mvp.ui.main.interactor.QuestionCardData
 import com.mindorks.framework.mvp.ui.main.presenter.MainMVPPresenter
 import com.mindorks.framework.mvp.ui.rate.view.RateUsDialog
 import com.mindorks.framework.mvp.util.ScreenUtils
-import com.mindorks.framework.mvp.util.addFragment
-import com.mindorks.framework.mvp.util.removeFragment
+import com.mindorks.framework.mvp.util.extension.addFragment
+import com.mindorks.framework.mvp.util.extension.removeFragment
 import com.mindorks.placeholderview.SwipeDecor
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
             drawerLayout.closeDrawer(GravityCompat.START)
         }
         val fragment = supportFragmentManager.findFragmentByTag(AboutFragment.TAG)
-        fragment?.let { onFragmentDetached(AboutFragment.TAG) } ?: let { super.onBackPressed() }
+        fragment?.let { onFragmentDetached(AboutFragment.TAG) } ?: super.onBackPressed()
     }
 
     override fun onDestroy() {
@@ -117,8 +117,8 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         startActivity(intent)
     }
 
-    override fun openRateUsDialog() = RateUsDialog.newInstance()?.let {
-        it.show(supportFragmentManager)
+    override fun openRateUsDialog() = RateUsDialog.newInstance().let {
+        it?.show(supportFragmentManager)
     }
 
     override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector

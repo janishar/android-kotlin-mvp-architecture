@@ -14,6 +14,7 @@ import com.mindorks.framework.mvp.data.network.ApiHelper
 import com.mindorks.framework.mvp.data.network.AppApiHelper
 import com.mindorks.framework.mvp.data.preferences.AppPreferenceHelper
 import com.mindorks.framework.mvp.data.preferences.PreferenceHelper
+import com.mindorks.framework.mvp.di.ApiKeyInfo
 import com.mindorks.framework.mvp.di.PreferenceInfo
 import com.mindorks.framework.mvp.util.AppConstants
 import com.mindorks.framework.mvp.util.SchedulerProvider
@@ -38,6 +39,7 @@ class AppModule {
             Room.databaseBuilder(context, AppDatabase::class.java, AppConstants.APP_DB_NAME).build()
 
     @Provides
+    @ApiKeyInfo
     internal fun provideApiKey(): String = BuildConfig.API_KEY
 
     @Provides
@@ -50,7 +52,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideProtectedApiHeader(apiKey: String, preferenceHelper: PreferenceHelper)
+    internal fun provideProtectedApiHeader(@ApiKeyInfo apiKey: String, preferenceHelper: PreferenceHelper)
             : ApiHeader.ProtectedApiHeader = ApiHeader.ProtectedApiHeader(apiKey = apiKey,
             userId = preferenceHelper.getCurrentUserId(),
             accessToken = preferenceHelper.getAccessToken())

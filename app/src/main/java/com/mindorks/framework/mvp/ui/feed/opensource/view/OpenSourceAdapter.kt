@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.OpenSource
-import com.mindorks.framework.mvp.util.loadImage
+import com.mindorks.framework.mvp.util.extension.loadImage
 import kotlinx.android.synthetic.main.item_open_source_list.view.*
 
 
@@ -22,9 +22,9 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
 
     override fun getItemCount() = openSourceListItems.size
 
-    override fun onBindViewHolder(holder: OpenSourceViewHolder, position: Int) = holder.let {
-        it.clear()
-        it.onBind(position)
+    override fun onBindViewHolder(holder: OpenSourceViewHolder, position: Int) = holder.run {
+        clear()
+        onBind(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = OpenSourceViewHolder(LayoutInflater.from(parent?.context)

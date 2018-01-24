@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.Blog
-import com.mindorks.framework.mvp.util.loadImage
+import com.mindorks.framework.mvp.util.extension.loadImage
 import kotlinx.android.synthetic.main.item_blog_list.view.*
 
 
@@ -42,7 +42,7 @@ class BlogAdapter(private val blogListItems: MutableList<Blog>) : RecyclerView.A
 
         fun onBind(position: Int) {
 
-            val (title, author, date, description, coverPageUrl, blogUrl) = blogListItems[position]
+            val (title, coverPageUrl, date, description, author, blogUrl) = blogListItems[position]
 
             inflateData(title, author, date, description, coverPageUrl)
             setItemClickListener(blogUrl)

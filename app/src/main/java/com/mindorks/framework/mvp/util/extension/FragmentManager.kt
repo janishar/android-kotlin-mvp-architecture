@@ -1,4 +1,4 @@
-package com.mindorks.framework.mvp.util
+package com.mindorks.framework.mvp.util.extension
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -30,10 +30,3 @@ internal fun FragmentManager.addFragment(containerViewId: Int,
             .commit()
 }
 
-internal fun ImageView.loadImage(url: String) {
-    Glide.with(this.context)
-            .load(url)
-            .asBitmap()
-            .centerCrop()
-            .into(this)
-}
