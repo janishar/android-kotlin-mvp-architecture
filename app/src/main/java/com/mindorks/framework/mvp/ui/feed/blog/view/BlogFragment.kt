@@ -25,7 +25,6 @@ class BlogFragment : BaseFragment(), BlogMVPView {
         fun newInstance(): BlogFragment {
             return BlogFragment()
         }
-
     }
 
     @Inject

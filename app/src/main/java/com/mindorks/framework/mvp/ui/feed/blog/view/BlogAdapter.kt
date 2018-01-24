@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.Blog
+import com.mindorks.framework.mvp.util.extension.loadImage
 import kotlinx.android.synthetic.main.item_blog_list.view.*
 
 
@@ -41,15 +41,16 @@ class BlogAdapter(private val blogListItems: MutableList<Blog>) : RecyclerView.A
         }
 
         fun onBind(position: Int) {
-            val blog = blogListItems[position]
-            loadCoverPageImage(blog)
-            setDataToFields(blog)
-            setItemClickListener(blog)
+
+            val (title, coverPageUrl, date, description, author, blogUrl) = blogListItems[position]
+
+            inflateData(title, author, date, description, coverPageUrl)
+            setItemClickListener(blogUrl)
         }
 
-        private fun setItemClickListener(blog: Blog) {
+        private fun setItemClickListener(blogUrl: String?) {
             itemView.setOnClickListener {
-                blog.blogUrl?.let {
+                blogUrl?.let {
                     try {
                         val intent = Intent()
                         // using "with" as an example
@@ -66,21 +67,15 @@ class BlogAdapter(private val blogListItems: MutableList<Blog>) : RecyclerView.A
             }
         }
 
-        private fun setDataToFields(blog: Blog) {
-            blog.title?.let { itemView.titleTextView.text = it }
-            blog.author?.let { itemView.authorTextView.text = it }
-            blog.date?.let { itemView.dateTextView.text = it }
-            blog.description?.let { itemView.contentTextView.text = it }
-        }
-
-        private fun loadCoverPageImage(blog: Blog) {
-            blog.coverImgUrl?.let {
-                Glide.with(itemView.context)
-                        .load(it)
-                        .asBitmap()
-                        .centerCrop()
-                        .into(itemView.coverImageView)
+        private fun inflateData(title: String?, author: String?, date: String?, description: String?, coverPageUrl: String?) {
+            title?.let { itemView.titleTextView.text = it }
+            author?.let { itemView.authorTextView.text = it }
+            date?.let { itemView.dateTextView.text = it }
+            description?.let { itemView.contentTextView.text = it }
+            coverPageUrl?.let {
+                itemView.coverImageView.loadImage(it)
             }
         }
+
     }
 }

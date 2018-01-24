@@ -19,7 +19,6 @@ import javax.inject.Inject
 class RateUsDialog : BaseDialogView(), RateUsDialogMVPView {
 
     companion object {
-
         fun newInstance(): RateUsDialog? {
             return RateUsDialog()
         }

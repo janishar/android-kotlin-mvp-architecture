@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.mindorks.framework.mvp.di.PreferenceInfo
 import com.mindorks.framework.mvp.util.AppConstants
+import com.mindorks.framework.mvp.util.extension.edit
 import javax.inject.Inject
 
 /**
@@ -25,15 +26,15 @@ class AppPreferenceHelper @Inject constructor(context: Context,
 
     override fun getCurrentUserName(): String = mPrefs.getString(PREF_KEY_CURRENT_USER_NAME, "ABC")
 
-    override fun setCurrentUserName(userName: String?) = mPrefs.edit().putString(PREF_KEY_CURRENT_USER_NAME, userName).apply()
+    override fun setCurrentUserName(userName: String?) = mPrefs.edit { putString(PREF_KEY_CURRENT_USER_NAME, userName) }
 
     override fun getCurrentUserEmail(): String = mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL, "abc@gmail.com")
 
-    override fun setCurrentUserEmail(email: String?) = mPrefs.edit().putString(PREF_KEY_CURRENT_USER_EMAIL, email).apply()
+    override fun setCurrentUserEmail(email: String?) = mPrefs.edit { putString(PREF_KEY_CURRENT_USER_EMAIL, email) }
 
     override fun getAccessToken(): String = mPrefs.getString(PREF_KEY_ACCESS_TOKEN, "")
 
-    override fun setAccessToken(accessToken: String?) = mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
+    override fun setAccessToken(accessToken: String?) = mPrefs.edit { putString(PREF_KEY_ACCESS_TOKEN, accessToken) }
 
     override fun getCurrentUserId(): Long? {
         val userId = mPrefs.getLong(PREF_KEY_CURRENT_USER_ID, AppConstants.NULL_INDEX)
@@ -45,10 +46,12 @@ class AppPreferenceHelper @Inject constructor(context: Context,
 
     override fun setCurrentUserId(userId: Long?) {
         val id = userId ?: AppConstants.NULL_INDEX
-        mPrefs.edit().putLong(PREF_KEY_CURRENT_USER_ID, id).apply()
+        mPrefs.edit { putLong(PREF_KEY_CURRENT_USER_ID, id) }
     }
 
     override fun setCurrentUserLoggedInMode(mode: AppConstants.LoggedInMode) {
-        mPrefs.edit().putInt(PREF_KEY_USER_LOGGED_IN_MODE, mode.type).apply()
+        mPrefs.edit { putInt(PREF_KEY_USER_LOGGED_IN_MODE, mode.type) }
     }
+
+
 }

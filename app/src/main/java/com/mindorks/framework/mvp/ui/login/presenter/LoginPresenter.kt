@@ -7,6 +7,7 @@ import com.mindorks.framework.mvp.ui.login.view.LoginMVPView
 import com.mindorks.framework.mvp.util.AppConstants
 import com.mindorks.framework.mvp.util.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**
@@ -24,16 +25,9 @@ class LoginPresenter<V : LoginMVPView, I : LoginMVPInteractor> @Inject internal 
                     compositeDisposable.add(it.doServerLoginApiCall(email, password)
                             .compose(schedulerProvider.ioToMainObservableScheduler())
                             .subscribe({ loginResponse ->
-                                when (loginResponse.statusCode.toString()) {
-                                    "success" -> {
-                                        updateUserInSharedPref(loginResponse = loginResponse,
-                                                loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
-                                        getView()?.openMainActivity()
-                                    }
-                                    else -> {
-                                        getView()?.showValidationMessage(AppConstants.LOGIN_FAILURE)
-                                    }
-                                }
+                                updateUserInSharedPref(loginResponse = loginResponse,
+                                        loggedInMode = AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
+                                getView()?.openMainActivity()
                             }, { err -> println(err) }))
                 }
 

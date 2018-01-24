@@ -86,7 +86,7 @@
       </android.support.design.widget.TextInputLayout>
 
       <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_server_login"
+        android:id="@+id/btnServerLogin"
         style="@style/Button.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,14 +105,14 @@
       android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatButton
-        android:id="@+id/ib_google_login"
+        android:id="@+id/ibGoogleLogin"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
         android:background="@drawable/ic_google_plus"/>
 
       <android.support.v7.widget.AppCompatButton
-        android:id="@+id/ib_fb_login"
+        android:id="@+id/ibFbLogin"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="24dp"

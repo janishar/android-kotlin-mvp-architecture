@@ -15,9 +15,7 @@ object FileUtils {
             val buffer = ByteArray(it.available())
             it.read(buffer)
             it.close()
-            buffer
-        }.let {
-            return String(it, Charset.forName("UTF-8"))
+            return String(buffer, Charset.forName("UTF-8"))
         }
     }
 }

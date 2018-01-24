@@ -54,8 +54,8 @@ class LoginActivity : BaseActivity(), LoginMVPView {
     }
 
     private fun setOnClickListeners() {
-        btn_server_login.setOnClickListener { presenter.onServerLoginClicked(et_email.text.toString(), et_password.text.toString()) }
-        ib_google_login.setOnClickListener { presenter.onGoogleLoginClicked() }
-        ib_fb_login.setOnClickListener { presenter.onFBLoginClicked() }
+        btnServerLogin.setOnClickListener { presenter.onServerLoginClicked(et_email.text.toString(), et_password.text.toString()) }
+        ibGoogleLogin.setOnClickListener { presenter.onGoogleLoginClicked() }
+        ibFbLogin.setOnClickListener { presenter.onFBLoginClicked() }
     }
 }
