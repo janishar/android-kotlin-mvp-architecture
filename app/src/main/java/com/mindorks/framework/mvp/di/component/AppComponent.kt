@@ -4,6 +4,7 @@ import android.app.Application
 import com.mindorks.framework.mvp.MvpApp
 import com.mindorks.framework.mvp.di.builder.ActivityBuilder
 import com.mindorks.framework.mvp.di.module.AppModule
+import com.mindorks.framework.mvp.service.PhoneStateReceiverModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -13,7 +14,7 @@ import javax.inject.Singleton
  * Created by jyotidubey on 05/01/18.
  */
 @Singleton
-@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (ActivityBuilder::class)])
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (ActivityBuilder::class), (PhoneStateReceiverModule::class)])
 interface AppComponent {
 
     @Component.Builder
