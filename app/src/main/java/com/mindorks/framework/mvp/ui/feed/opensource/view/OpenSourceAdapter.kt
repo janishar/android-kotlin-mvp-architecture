@@ -1,11 +1,11 @@
 package com.mindorks.framework.mvp.ui.feed.opensource.view
 
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.net.toUri
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.data.network.OpenSource
 import com.mindorks.framework.mvp.util.extension.loadImage
@@ -58,7 +58,7 @@ class OpenSourceAdapter(openSourceListItems: MutableList<OpenSource>) : Recycler
                         // using "apply" as an example
                         itemView.context.startActivity(Intent().apply {
                             action = Intent.ACTION_VIEW
-                            data = Uri.parse(it)
+                            data = it.toUri()
                             addCategory(Intent.CATEGORY_BROWSABLE)
                         })
                     } catch (e: Exception) {

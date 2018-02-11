@@ -2,9 +2,9 @@ package com.mindorks.framework.mvp.data.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.content.edit
 import com.mindorks.framework.mvp.di.PreferenceInfo
 import com.mindorks.framework.mvp.util.AppConstants
-import com.mindorks.framework.mvp.util.extension.edit
 import javax.inject.Inject
 
 /**

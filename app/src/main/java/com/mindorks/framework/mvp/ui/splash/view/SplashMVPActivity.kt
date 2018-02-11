@@ -2,7 +2,6 @@ package com.mindorks.framework.mvp.ui.splash.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.mindorks.framework.mvp.R
 import com.mindorks.framework.mvp.ui.base.view.BaseActivity
 import com.mindorks.framework.mvp.ui.login.view.LoginActivity

@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import androidx.graphics.drawable.toDrawable
 import com.mindorks.framework.mvp.R
 
 /**
@@ -15,7 +16,7 @@ object CommonUtil {
         val progressDialog = ProgressDialog(context)
         progressDialog.let {
             it.show()
-            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
             it.setContentView(R.layout.progress_dialog)
             it.isIndeterminate = true
             it.setCancelable(false)
