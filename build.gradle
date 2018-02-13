@@ -47,7 +47,7 @@ ext {
     butterKnifeVersion = '8.8.1'
     roomDatabaseVersion = '1.0.0'
     placeholderviewVersion = '0.6.1'
-    debugDBVersion = '1.0.1'
+    debugDBVersion = '1.0.3'
     timberVersion = '4.6.0'
 
     //Test dependencies
