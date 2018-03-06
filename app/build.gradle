@@ -95,4 +95,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+
+    // Android Kotlin Extension
+    implementation "androidx.core:core-ktx:$rootProject.androidKTXVersion"
 }

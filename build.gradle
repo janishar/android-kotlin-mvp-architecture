@@ -54,4 +54,5 @@ ext {
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
     mockitoVersion = '2.7.1'
+    androidKTXVersion = '0.1'
 }
