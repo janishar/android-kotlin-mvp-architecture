@@ -27,8 +27,8 @@ abstract class BaseFragment : Fragment(), MVPView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         performDependencyInjection()
+        super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
     }
 
