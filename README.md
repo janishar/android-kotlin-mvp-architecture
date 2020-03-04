@@ -61,6 +61,8 @@ This repository contains a detailed sample app that implements MVP architecture 
 8. [Debugging Android Databases And Shared Preferences In The Easiest Way](https://blog.mindorks.com/debugging-android-databases-and-shared-preferences-in-the-easiest-way-e5f705dfc06b#.pxw0hvnws)
 9. [RxJava Anatomy: What is RxJava, how RxJava is designed, and how RxJava works.](https://blog.mindorks.com/rxjava-anatomy-what-is-rxjava-how-rxjava-is-designed-and-how-rxjava-works-d357b3aca586)
 
+### Looking for MVVM Architecture for Beginners - [Check here](https://github.com/MindorksOpenSource/MVVM-Architecture-Android-Beginners)
+
 ### Looking for MVVM Architecture - [Check here](https://github.com/MindorksOpenSource/android-mvvm-architecture)
 
 ### Mindorks open source projects
