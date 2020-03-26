@@ -65,6 +65,8 @@ This repository contains a detailed sample app that implements MVP architecture 
 
 ### Looking for MVVM Architecture - [Check here](https://github.com/MindorksOpenSource/android-mvvm-architecture)
 
+### Learn to build a ride-sharing Android app like Uber, Lyft - [Check here](https://github.com/MindorksOpenSource/ridesharing-uber-lyft-app)
+
 ### Mindorks open source projects
 [Check out Mindorks awesome open source projects here](https://mindorks.com/open-source-projects)
 
