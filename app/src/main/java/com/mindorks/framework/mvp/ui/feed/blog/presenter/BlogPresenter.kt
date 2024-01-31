@@ -17,12 +17,12 @@ class BlogPresenter<V : BlogMVPView, I : BlogMVPInteractor> @Inject constructor(
         interactor?.let {
             it.getBlogList()
                     .compose(schedulerProvider.ioToMainObservableScheduler())
-                    .subscribe { blogResponse ->
+                    .subscribe({ blogResponse ->
                         getView()?.let {
                             it.hideProgress()
                             it.displayBlogList(blogResponse.data)
                         }
-                    }
+                    }, { err -> println(err) })
         }
     }
 }
